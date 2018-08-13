@@ -61,7 +61,7 @@ def napisi_opozorilo_prevec_bomb(mogoce):
     if mogoce == 'ja':
         prevec_bomb.config(text='Število bomb presega število polj. To ni kul.')
         prevec_bomb.config(fg='red')
-        prevec_bomb.grid(row=3, column=1)
+        prevec_bomb.grid(row=4, column=1)
     else:
         prevec_bomb.config(text='')
         prevec_bomb.grid(row=4, column=1)
