@@ -10,6 +10,61 @@ STOLPCI = Konstanta(10)
 BOMBE = Konstanta(int(VRSTICE.stevilo * STOLPCI.stevilo * 0.1))
 
 
+def preveri():
+    vrstice = vhod_vrstice.get()
+    stolpci = vhod_stolpci.get()
+    bombe = vhod_bombe.get()
+    if vrstice == '':
+        vrstice = str(VRSTICE.stevilo)
+    if stolpci == '':
+        stolpci = str(STOLPCI.stevilo)
+    if bombe == '':
+        bombe = str(BOMBE.stevilo)
+    vse = vrstice + stolpci + bombe
+    if preveri_digit(vse):
+        if preveri_stevilo_bomb(vrstice, stolpci, bombe):
+            if preveri_velikost(vrstice, stolpci):
+                VRSTICE.stevilo = int(vrstice)
+                STOLPCI.stevilo = int(stolpci)
+                BOMBE.stevilo = int(bombe)
+
+
+def preveri_digit(vse):
+    if not vse.isdigit():
+        napisi_opozorilo('digit')
+        return False
+    return True
+
+
+def preveri_stevilo_bomb(vrstice, stolpci, bombe):
+    if int(vrstice) * int(stolpci) < int(bombe):
+        napisi_opozorilo('bombe')
+        return False
+    return True
+
+
+def preveri_velikost(vrstice, stolpci):
+    if int(vrstice) < 5 or int(vrstice) > 35:
+        napisi_opozorilo('vrstice')
+        return False
+    if int(stolpci) < 5 or int(stolpci) > 35:
+        napisi_opozorilo('stolpci')
+        return False
+    return True
+
+
+def napisi_opozorilo(thing):
+    if thing == 'digit':
+        opozorilo.config(text='Prosim, vpišite le naravna števila ali pustite prazno.')
+    elif thing == 'bombe':
+        opozorilo.config(text='Število bomb presega število polj.')
+    elif thing == 'vrstice':
+        opozorilo.config(text='Število vrstic naj bo vsaj 5 in manjše od 36.')
+    else:
+        opozorilo.config(text='Število stolpcev naj bo vsaj 5 in manjše od 36.')
+    opozorilo.grid(row=3, column=1)
+
+
 def priporoci():
     preveri()
     vrstice = VRSTICE.stevilo
@@ -22,53 +77,10 @@ def priporoci():
     napis_priporocilo_bombe.grid(row=1, column=1)
 
 
-def preveri():
-    vse_je_ok = 1 #da na koncu vemo, ce se kaj naredi ali pa vse porpade
-    vrstice = vhod_vrstice.get()
-    stolpci = vhod_stolpci.get()
-    bombe = vhod_bombe.get()
-    vse = vrstice + stolpci + bombe
-    if not(vse.isdigit() or (vse == '')):
-        vse_je_ok = 0
-        napisi_opozorilo_ni_naravno_stevilo('ja')
-    if vse_je_ok == 1:
-        if vrstice != '':
-            VRSTICE.stevilo = int(vrstice)
-        if stolpci != '':
-            STOLPCI.stevilo = int(stolpci)
-        napisi_opozorilo_ni_naravno_stevilo('ne')
-        if bombe != '':
-            if VRSTICE.stevilo * STOLPCI.stevilo < int(bombe):
-                napisi_opozorilo_prevec_bomb('ja')
-            else:
-                napisi_opozorilo_prevec_bomb('ne')
-                BOMBE.stevilo = int(bombe)
-        napisi_opozorilo_ni_naravno_stevilo('ne')
-
-
-def napisi_opozorilo_ni_naravno_stevilo(mogoce):
-    if mogoce == 'ja':
-        ni_naravno_stevilo.config(text='Prosim, vpišite le naravna števila ali pa pustite prazno.')
-        ni_naravno_stevilo.config(fg='red')
-        ni_naravno_stevilo.grid(row=3, column=1)
-    else:
-        ni_naravno_stevilo.config(text='Hvala! ;)')
-        ni_naravno_stevilo.config(fg='black')
-        ni_naravno_stevilo.grid(row=3, column=1)
-
-
-def napisi_opozorilo_prevec_bomb(mogoce):
-    if mogoce == 'ja':
-        prevec_bomb.config(text='Število bomb presega število polj. To ni kul.')
-        prevec_bomb.config(fg='red')
-        prevec_bomb.grid(row=4, column=1)
-    else:
-        prevec_bomb.config(text='')
-        prevec_bomb.grid(row=4, column=1)
-
-
 def ok():
     preveri()
+    opozorilo.config(text='Hvala! ;)', fg='black')
+    opozorilo.grid(row=3, column=1)
     print('Izbrano stevilo vrstic: ', VRSTICE.stevilo)
     print('Izbrano stevilo stolpcev: ', STOLPCI.stevilo)
     print('Izbrano stevilo bomb: ', BOMBE.stevilo)
@@ -114,8 +126,7 @@ prazna_vrstica = tk.Label(text=' ')
 prazna_vrstica.grid(row=5, column=1)
 
 #opozorila
-ni_naravno_stevilo = tk.Label(spodaj, text='', fg='red')
-prevec_bomb = tk.Label(spodaj, text='')
+opozorilo = tk.Label(spodaj, text='', fg='red')
 
 #OK
 ok_button = tk.Button(okno, text='OK', command=ok)
