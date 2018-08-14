@@ -27,6 +27,11 @@ def preveri():
                 VRSTICE.stevilo = int(vrstice)
                 STOLPCI.stevilo = int(stolpci)
                 BOMBE.stevilo = int(bombe)
+                opozorilo.config(text='')
+                hvala.config(text='Hvala.')
+                hvala.grid(row=3, column=1)
+                return True
+    return False
 
 
 def preveri_digit(vse):
@@ -57,33 +62,36 @@ def napisi_opozorilo(thing):
     if thing == 'digit':
         opozorilo.config(text='Prosim, vpišite le naravna števila ali pustite prazno.')
     elif thing == 'bombe':
-        opozorilo.config(text='Število bomb presega število polj.')
+        opozorilo.config(text='Število bomb presega število polj.', fg='red')
     elif thing == 'vrstice':
         opozorilo.config(text='Število vrstic naj bo vsaj 5 in manjše od 36.')
     else:
         opozorilo.config(text='Število stolpcev naj bo vsaj 5 in manjše od 36.')
     opozorilo.grid(row=3, column=1)
+    hvala.config(text='')
 
 
 def priporoci():
     preveri()
-    vrstice = VRSTICE.stevilo
-    stolpci = STOLPCI.stevilo
-    if vhod_vrstice.get() != '' and vhod_vrstice.get().isdigit():
-        vrstice = int(vhod_vrstice.get())
-    if vhod_stolpci.get() != '' and vhod_stolpci.get().isdigit():
-        stolpci = int(vhod_stolpci.get())
-    napis_priporocilo_bombe = tk.Label(spodaj, text='priporočeno število bomb: {}'.format(str(int(vrstice * stolpci // 10))))
-    napis_priporocilo_bombe.grid(row=1, column=1)
+    if preveri():
+        vrstice = VRSTICE.stevilo
+        stolpci = STOLPCI.stevilo
+        if vhod_vrstice.get() != '' and vhod_vrstice.get().isdigit():
+            vrstice = int(vhod_vrstice.get())
+        if vhod_stolpci.get() != '' and vhod_stolpci.get().isdigit():
+            stolpci = int(vhod_stolpci.get())
+        napis_priporocilo_bombe = tk.Label(spodaj, text='priporočeno število bomb: {}'.format(str(int(vrstice * stolpci // 10))))
+        napis_priporocilo_bombe.grid(row=1, column=1)
 
 
 def ok():
     preveri()
-    opozorilo.config(text='Hvala! ;)', fg='black')
-    opozorilo.grid(row=3, column=1)
-    print('Izbrano stevilo vrstic: ', VRSTICE.stevilo)
-    print('Izbrano stevilo stolpcev: ', STOLPCI.stevilo)
-    print('Izbrano stevilo bomb: ', BOMBE.stevilo)
+    if preveri():
+        hvala.config(text='Hvala! ;)')
+        hvala.grid(row=3, column=1)
+        print('Izbrano stevilo vrstic: ', VRSTICE.stevilo)
+        print('Izbrano stevilo stolpcev: ', STOLPCI.stevilo)
+        print('Izbrano stevilo bomb: ', BOMBE.stevilo)
 
 
 #####################################################################################################################
@@ -127,6 +135,9 @@ prazna_vrstica.grid(row=5, column=1)
 
 #opozorila
 opozorilo = tk.Label(spodaj, text='', fg='red')
+
+#hvala
+hvala = tk.Label(spodaj, text='')
 
 #OK
 ok_button = tk.Button(okno, text='OK', command=ok)
