@@ -1,4 +1,5 @@
 import tkinter as tk
+import sys
 
 
 class Konstanta():
@@ -7,7 +8,7 @@ class Konstanta():
 
 VRSTICE = Konstanta(10)
 STOLPCI = Konstanta(10)
-BOMBE = Konstanta(int(VRSTICE.stevilo * STOLPCI.stevilo * 0.1))
+BOMBE = Konstanta(int(VRSTICE.stevilo * STOLPCI.stevilo * 0.15))
 
 
 def preveri():
@@ -80,7 +81,7 @@ def priporoci():
             vrstice = int(vhod_vrstice.get())
         if vhod_stolpci.get() != '' and vhod_stolpci.get().isdigit():
             stolpci = int(vhod_stolpci.get())
-        napis_priporocilo_bombe = tk.Label(spodaj, text='priporočeno število bomb: {}'.format(str(int(vrstice * stolpci // 10))))
+        napis_priporocilo_bombe = tk.Label(spodaj, text='priporočeno število bomb: {}'.format(str(int(vrstice * stolpci * 0.15))))
         napis_priporocilo_bombe.grid(row=1, column=1)
 
 
@@ -92,6 +93,7 @@ def ok():
         print('Izbrano stevilo vrstic: ', VRSTICE.stevilo)
         print('Izbrano stevilo stolpcev: ', STOLPCI.stevilo)
         print('Izbrano stevilo bomb: ', BOMBE.stevilo)
+        #sys.exit()
 
 
 #####################################################################################################################

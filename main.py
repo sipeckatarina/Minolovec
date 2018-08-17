@@ -1,9 +1,11 @@
 # tukaj je leđit koda ... v nastajanju
 import tkinter as tk
 import startno_okno as sto
+import random as r
 #import gumbi as g
 #from gumbi import Gumb
 
+PUF = 'puf'
 VRSTICE = sto.VRSTICE.stevilo
 STOLPCI = sto.STOLPCI.stevilo
 BOMBE = sto.BOMBE.stevilo
@@ -32,6 +34,7 @@ class Gumb():
         self.stanje = stanje
         self.stevilka = stevilka
         self.velikost = VELIKOST_GUMBA
+        self.napis = str(stevilka)
         self.button = tk.Button(okno, text='', width=self.velikost, height=self.velikost//2, command=self.levi_klik)
 
     def __repr__(self):
@@ -47,10 +50,45 @@ class Gumb():
     def prikazi(self, okno):
         return self.button.grid(row=self.vrstica, column=self.stolpec)
 
-    def levi_klik(self):
-        self.button.config(text='{}'.format(self.stevilka))
+    def razkrij(self):
+        self.button.config(text=self.napis)
 
-#    def postavi_zastavico:
+    def levi_klik(self):
+        if self.napis == PUF:
+            napis_konec.pack()
+        self.poisci_sosednje()
+        self.poisci_stevilo_bomb()
+        #self.odpri_sosednje()
+        self.button.config(text=self.napis)
+
+    def poisci_sosednje(self): #se opravicujem za izjemno grdo kodo
+        if self.vrstica >= 1 and self.vrstica < VRSTICE:
+            self.gumb_gor = tabela[self.vrstica - 1][self.stolpec]
+            self.gumb_dol = tabela[self.vrstica + 1][self.stolpec]
+            if self.stolpec >= 1 and self.stolpec < STOLPCI:
+                self.gumb_levo_gor = tabela[self.vrstica-1][self.stolpec-1]
+                self.gumb_gor = tabela[self.vrstica-1][self.stolpec]
+                self.gumb_desno_gor = tabela[self.vrstica-1][self.stolpec+1]
+                self.gumb_levo = tabela[self.vrstica][self.stolpec-1]
+                self.gumb_desno = tabela[self.vrstica][self.stolpec+1]
+                self.gumb_levo_dol = tabela[self.vrstica+1][self.stolpec-1]
+                self.gumb_dol = tabela[self.vrstica+1][self.stolpec]
+                self.gumb_desno_dol = tabela[self.vrstica+1][self.stolpec+1]
+                self.sosednji = [self.gumb_levo_gor, self.gumb_gor, self.gumb_desno_gor, self.gumb_levo, self.gumb_desno, self.gumb_levo_dol, self.gumb_dol, self.gumb_desno_dol]
+
+    def odpri_sosednje(self):
+        self.poisci_sosednje()
+        for gumb in self.sosednji:
+            gumb.button.config(text=gumb.napis)
+
+    def poisci_stevilo_bomb(self):
+        self.poisci_sosednje()
+        num = 0
+        for vsak in self.sosednji:
+            if vsak.napis == PUF:
+                num += 1
+        self.napis = num
+
 
 
 
@@ -58,9 +96,15 @@ class Gumb():
 
 
 #mreža z gumbi
+tabela = []
 for i in range(VRSTICE):
+    v = []
     for j in range(STOLPCI):
-        Gumb(i, j, (i + j)%9).prikazi(sp)
+        g = Gumb(i, j)
+        v.append(g)
+        g.prikazi(sp)
+    tabela.append(v)
+
 
 #zgornji napisi za stevilo vrstic, stolpcev in bomb
 zgornji_napis_vrstice = tk.Label(zg, text='Število vrstic: {}'.format(VRSTICE))
@@ -76,7 +120,26 @@ prazna_vrstica.pack()
 prazna_vrstica2 = tk.Label(sp, text='')
 prazna_vrstica2.grid(row=VRSTICE+1, column=STOLPCI//2)
 
+#spodnji gumb 'BOMBA'
 gumb_za_zastavico = tk.Button(sp, text='BOMBA', height=VELIKOST_GUMBA//2, width=VELIKOST_GUMBA)#, command=naredi_zastavico)
 gumb_za_zastavico.grid(row=VRSTICE+2, column=STOLPCI//2)
 
+#osnova za seznam gumbov z bombani
+zaloga_bomb = []
+
+#napis za konec igre
+napis_konec = tk.Label(zg, text='BUM! NALETELI STE NA MINO ... IGRA JE ZA VAS ŽAL KONČANA!', fg='red')
+
+#na random izbrane bombe
+for krneki in range(BOMBE):
+    i = r.randint(0, VRSTICE - 1)
+    j = r.randint(0, STOLPCI - 1)
+    tabela[i][j].napis = PUF
+    tabela[i][j].button.config(fg='red')
+    zaloga_bomb.append(tabela[i][j])
+
+print(zaloga_bomb)
+
 main_okno.mainloop()
+
+#krajni, odpiranje sosednjih
