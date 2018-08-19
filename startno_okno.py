@@ -48,10 +48,10 @@ def preveri_stevilo_bomb(vrstice, stolpci, bombe):
 
 
 def preveri_velikost(vrstice, stolpci):
-    if int(vrstice) < 5 or int(vrstice) > 35:
+    if int(vrstice) < 5 or int(vrstice) > 25:
         napisi_opozorilo('vrstice')
         return False
-    if int(stolpci) < 5 or int(stolpci) > 35:
+    if int(stolpci) < 5 or int(stolpci) > 25:
         napisi_opozorilo('stolpci')
         return False
     return True
@@ -63,9 +63,9 @@ def napisi_opozorilo(thing):
     elif thing == 'bombe':
         opozorilo.config(text='Število bomb presega število polj.', fg='red')
     elif thing == 'vrstice':
-        opozorilo.config(text='Število vrstic naj bo vsaj 5 in manjše od 36.')
+        opozorilo.config(text='Število vrstic naj bo vsaj 5 in manjše ali enako 25.')
     else:
-        opozorilo.config(text='Število stolpcev naj bo vsaj 5 in manjše od 36.')
+        opozorilo.config(text='Število stolpcev naj bo vsaj 5 in manjše ali enako 25.')
     opozorilo.grid(row=3, column=1)
     hvala.config(text='')
 
