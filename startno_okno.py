@@ -1,15 +1,13 @@
 import tkinter as tk
-import sys
-
 
 class Konstanta():
     def __init__(self, stevilo):
         self.stevilo = stevilo
 
+#v mainu VRSTICE, STOLPCI in BOMBE niso objekti, ampak stevila
 VRSTICE = Konstanta(10)
 STOLPCI = Konstanta(10)
 BOMBE = Konstanta(int(VRSTICE.stevilo * STOLPCI.stevilo * 0.15))
-
 
 def preveri():
     vrstice = vhod_vrstice.get()
@@ -93,7 +91,7 @@ def ok():
         print('Izbrano stevilo vrstic: ', VRSTICE.stevilo)
         print('Izbrano stevilo stolpcev: ', STOLPCI.stevilo)
         print('Izbrano stevilo bomb: ', BOMBE.stevilo)
-        #sys.exit()
+        okno.destroy()
 
 
 #####################################################################################################################

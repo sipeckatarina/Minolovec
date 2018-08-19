@@ -25,6 +25,11 @@ sp.grid(row=2)
 
 #def naredi_zastavico():
 
+def odpri_vse():
+    for i in range(VRSTICE):
+        for j in range(STOLPCI):
+            tabela[i][j].odpri_konec()
+
 class Gumb():
 
     def __init__(self, vrstica, stolpec, stevilka=None, stanje=0, okno=sp):
@@ -35,7 +40,7 @@ class Gumb():
         self.stevilka = stevilka
         self.velikost = VELIKOST_GUMBA
         self.napis = str(stevilka)
-        self.button = tk.Button(okno, text='', width=self.velikost, height=self.velikost//2, command=self.levi_klik)
+        self.button = tk.Button(okno, text='', width=self.velikost, height=self.velikost//2, command=self.levi_klik, relief='raised')
 
     def __repr__(self):
         return 'Gumb ({}, {}, {}, {})'.format(self.vrstica, self.stolpec, self.stanje, self.stevilka)
@@ -54,32 +59,53 @@ class Gumb():
         self.button.config(text=self.napis)
 
     def levi_klik(self):
-        if self.napis == PUF:
-            napis_konec.pack()
-        self.poisci_sosednje()
-        self.poisci_stevilo_bomb()
-        #self.odpri_sosednje()
-        self.button.config(text=self.napis)
+        if self.button.config('relief')[-1] != 'sunken':
+            self.button.config(relief='sunken')
+            if self.napis == PUF:
+                napis_konec.pack()
+                odpri_vse()
+            else:
+                self.poisci_sosednje()
+                self.poisci_stevilo_bomb()
+                if self.napis == 0:
+                    self.odpri_sosednje()
+                    self.napis = ''
+            self.button.config(text=self.napis)
 
-    def poisci_sosednje(self): #se opravicujem za izjemno grdo kodo
-        if self.vrstica >= 1 and self.vrstica < VRSTICE:
+    def poisci_sosednje(self):
+        self.sosednji = []
+        #vrstica zgoraj
+        if not(self.vrstica == 0):
             self.gumb_gor = tabela[self.vrstica - 1][self.stolpec]
+            self.sosednji.append(self.gumb_gor)
+            if not(self.stolpec == 0):
+                self.gumb_levo_gor = tabela[self.vrstica - 1][self.stolpec - 1]
+                self.sosednji.append(self.gumb_levo_gor)
+            if not(self.stolpec == STOLPCI - 1):
+                self.gumb_desno_gor = tabela[self.vrstica - 1][self.stolpec + 1]
+                self.sosednji.append(self.gumb_desno_gor)
+        #vrstica spodaj
+        if not(self.vrstica == VRSTICE - 1):
             self.gumb_dol = tabela[self.vrstica + 1][self.stolpec]
-            if self.stolpec >= 1 and self.stolpec < STOLPCI:
-                self.gumb_levo_gor = tabela[self.vrstica-1][self.stolpec-1]
-                self.gumb_gor = tabela[self.vrstica-1][self.stolpec]
-                self.gumb_desno_gor = tabela[self.vrstica-1][self.stolpec+1]
-                self.gumb_levo = tabela[self.vrstica][self.stolpec-1]
-                self.gumb_desno = tabela[self.vrstica][self.stolpec+1]
-                self.gumb_levo_dol = tabela[self.vrstica+1][self.stolpec-1]
-                self.gumb_dol = tabela[self.vrstica+1][self.stolpec]
-                self.gumb_desno_dol = tabela[self.vrstica+1][self.stolpec+1]
-                self.sosednji = [self.gumb_levo_gor, self.gumb_gor, self.gumb_desno_gor, self.gumb_levo, self.gumb_desno, self.gumb_levo_dol, self.gumb_dol, self.gumb_desno_dol]
+            self.sosednji.append(self.gumb_dol)
+            if not(self.stolpec == 0):
+                self.gumb_levo_dol = tabela[self.vrstica + 1][self.stolpec - 1]
+                self.sosednji.append(self.gumb_levo_dol)
+            if not(self.stolpec == STOLPCI - 1):
+                self.gumb_desno_dol = tabela[self.vrstica + 1][self.stolpec + 1]
+                self.sosednji.append(self.gumb_desno_dol)
+        #levi in desni sosed
+        if not(self.stolpec == 0):
+            self.gumb_levo = tabela[self.vrstica][self.stolpec - 1]
+            self.sosednji.append(self.gumb_levo)
+        if not(self.stolpec == STOLPCI - 1):
+            self.gumb_desno = tabela[self.vrstica][self.stolpec + 1]
+            self.sosednji.append(self.gumb_desno)
 
     def odpri_sosednje(self):
-        self.poisci_sosednje()
+#        self.poisci_sosednje()
         for gumb in self.sosednji:
-            gumb.button.config(text=gumb.napis)
+            gumb.levi_klik()
 
     def poisci_stevilo_bomb(self):
         self.poisci_sosednje()
@@ -89,7 +115,12 @@ class Gumb():
                 num += 1
         self.napis = num
 
-
+    def odpri_konec(self):
+        if self.button.config('relief')[-1] != 'sunken':
+            if not(tabela[self.vrstica][self.stolpec] in zaloga_bomb):
+                self.button.config(relief='sunken', text='-', fg='blue')
+            else:
+                self.button.config(text=self.napis, fg='blue')
 
 
 ############################################################################################################################
@@ -128,7 +159,7 @@ gumb_za_zastavico.grid(row=VRSTICE+2, column=STOLPCI//2)
 zaloga_bomb = []
 
 #napis za konec igre
-napis_konec = tk.Label(zg, text='BUM! NALETELI STE NA MINO ... IGRA JE ZA VAS ŽAL KONČANA!', fg='red')
+napis_konec = tk.Label(zg, text='SORČI! ... Kar hrabro na drugo minsko poje. ;)', fg='red')
 
 #na random izbrane bombe
 for krneki in range(BOMBE):
@@ -137,8 +168,6 @@ for krneki in range(BOMBE):
     tabela[i][j].napis = PUF
     tabela[i][j].button.config(fg='red')
     zaloga_bomb.append(tabela[i][j])
-
-print(zaloga_bomb)
 
 main_okno.mainloop()
 
