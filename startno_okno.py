@@ -1,5 +1,6 @@
 import tkinter as tk
 
+
 class Konstanta():
     def __init__(self, stevilo):
         self.stevilo = stevilo
@@ -75,12 +76,14 @@ def priporoci():
     if preveri():
         vrstice = VRSTICE.stevilo
         stolpci = STOLPCI.stevilo
-        if vhod_vrstice.get() != '' and vhod_vrstice.get().isdigit():
+        if vhod_vrstice.get() != '':
             vrstice = int(vhod_vrstice.get())
-        if vhod_stolpci.get() != '' and vhod_stolpci.get().isdigit():
+        if vhod_stolpci.get() != '':
             stolpci = int(vhod_stolpci.get())
-        napis_priporocilo_bombe = tk.Label(spodaj, text='priporočeno število bomb: {}'.format(str(int(vrstice * stolpci * 0.15))))
+        priporocilo = (int(vrstice * stolpci * 0.15))
+        napis_priporocilo_bombe = tk.Label(spodaj, text='priporočeno število bomb: {}'.format(priporocilo))
         napis_priporocilo_bombe.grid(row=1, column=1)
+        BOMBE.stevilo = priporocilo
 
 
 def ok():
@@ -94,6 +97,7 @@ def ok():
         okno.destroy()
 
 
+
 #####################################################################################################################
 
 
@@ -101,13 +105,25 @@ def ok():
 okno = tk.Tk()
 okno.title('Minolovec (upam)')
 
-#razdeljeno okno na dva dela
+#poravnaj okno
+sirina_okna = okno.winfo_reqwidth()
+dolzina_okna = okno.winfo_reqheight()
+sirina_ekrana = okno.winfo_screenwidth()
+dolzina_ekrana = okno.winfo_screenheight()
+pozicija_desno = int(sirina_ekrana / 2 - sirina_okna / 2)
+pozicija_dol = int(dolzina_ekrana / 2 - dolzina_okna / 2)
+okno.geometry("+{}+{}".format(pozicija_desno, pozicija_dol))
+
+#razdeljeno okno na tri dele
+cist_zgoraj = tk.Frame(okno)
 zgoraj = tk.Frame(okno)
 spodaj = tk.Frame(okno)
-zgoraj.grid(row=1, column=1)
-spodaj.grid(row=2, column=1)
+cist_zgoraj.grid(row=1, column=1)
+zgoraj.grid(row=2, column=1)
+spodaj.grid(row=3, column=1)
 
 #definirani napisi
+napis_privzeto = tk.Label(cist_zgoraj, text='Vse privzete vrednosti so 10, 10 in 15.', fg='grey')
 napis_vhod_vrstice = tk.Label(zgoraj, text='Število vrstic: ')
 napis_vhod_stolpci = tk.Label(zgoraj, text='Število stolpcev: ')
 napis_vhod_bombe = tk.Label(zgoraj, text='Število bomb: ')
@@ -118,15 +134,16 @@ vhod_stolpci = tk.Entry(zgoraj)
 vhod_bombe = tk.Entry(zgoraj)
 
 #zgornji del
-napis_vhod_vrstice.grid(row=1, column=1)
+napis_privzeto.grid(row=1, column=1)
+napis_vhod_vrstice.grid(row=2, column=1)
 napis_vhod_stolpci.grid(row=3, column=1)
 napis_vhod_bombe.grid(row=5, column=1)
-vhod_vrstice.grid(row=1, column=2)
+vhod_vrstice.grid(row=2, column=2)
 vhod_stolpci.grid(row=3, column=2)
 vhod_bombe.grid(row=5, column=2)
 
 #priporoci
-priporoci_gumb = tk.Button(spodaj, text='priporoči', command=priporoci)
+priporoci_gumb = tk.Button(spodaj, text='priporoči število bomb', command=priporoci)
 priporoci_gumb.grid(row=2, column=1)
 
 #prazna vrstica, da je lepše

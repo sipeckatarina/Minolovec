@@ -1,9 +1,10 @@
-# tukaj je leđit koda ... v nastajanju
 import tkinter as tk
 import startno_okno as sto
 import random as r
-#import gumbi as g
-#from gumbi import Gumb
+import sys
+import os
+import timeit
+
 
 PUF = 'puf'
 ZASTAVA = 'f'
@@ -11,21 +12,32 @@ VRSTICE = sto.VRSTICE.stevilo
 STOLPCI = sto.STOLPCI.stevilo
 BOMBE = sto.BOMBE.stevilo
 cekiranje_za_zmago = sto.Konstanta(1)
+VELIKOST_GUMBA = 3
 
-velikost_gumba = sto.Konstanta(50//int(max(VRSTICE, STOLPCI)))
-VELIKOST_GUMBA = velikost_gumba.stevilo
-
+#stanja
 zastava, pritisnjen, zakrit, bomba = 'zastava', 'pritisnjen', 'zakrit', 'bomba'
 
+#okno
 main_okno = tk.Tk()
-main_okno.title('Minolovec (upam)')
-#main_okno.geometry("500x500") #velikost okna
+main_okno.title('Minolovec')
+
+#poravnaj okno
+sirina_okna = main_okno.winfo_reqwidth()
+dolzina_okna = main_okno.winfo_reqheight()
+sirina_ekrana = main_okno.winfo_screenwidth()
+dolzina_ekrana = main_okno.winfo_screenheight()
+pozicija_desno = int(sirina_ekrana / 2 - sirina_okna)
+pozicija_dol = int(dolzina_ekrana / 2 - dolzina_okna)
+main_okno.geometry("+{}+{}".format(pozicija_desno, pozicija_dol))
 
 #razdeljeno okno na dva dela
 zg = tk.Frame(main_okno)
 sp = tk.Frame(main_okno)
 zg.grid(row=1)
 sp.grid(row=2)
+
+
+#--------------------------------------------------------------------------------------------------------------------
 
 
 def naredi_tabelo():
@@ -59,6 +71,14 @@ def povej_gumbom_kaj_so():
             tabela[i][j].poisci_stevilo_bomb()
 
 
+def gumbom_prilagodi_barvo():
+    tabela_barv = [None, 'dark green', 'darkOrchid4', 'navy', 'slate blue', 'gold4', 'DodgerBlue4', 'coral4', 'turquoise4']
+    for i in range(VRSTICE):
+        for j in range(STOLPCI):
+            if tabela[i][j] not in zaloga_bomb:
+                tabela[i][j].button.config(fg=tabela_barv[int(tabela[i][j].napis)])
+
+
 def preveri_zmago():
     if cekiranje_za_zmago.stevilo == 1:
         for i in range(VRSTICE):
@@ -78,15 +98,16 @@ def odpri_vse():
 
 def izpisi_koncen_napis(izid):
     if izid == 'zmaga':
-        napis_konec.config(text='BRAVO!')
+        napis_konec.config(text='BRAVO!', fg='VioletRed1')
     else:
         prvi = 'Tole pa ni šlo...'
-        drugi = 'BUM, lahko greste med Dunajske dečke.'
+        drugi = 'BUM! Lahko greste med Dunajske dečke.'
         tretji = 'Več sreče prihodnjič.'
         cetrti = 'SORČI! Imate še 8 življenj.'
         peti = 'Slaba... Kar hrabro na naslednje minsko polje.'
-        i = r.randint(0, 4)
-        zaloga_napisov = [prvi, drugi, tretji, cetrti, peti]
+        sesti = 'Kaj pa sreča v ljubezni?'
+        i = r.randint(0, 5)
+        zaloga_napisov = [prvi, drugi, tretji, cetrti, peti, sesti]
         napis_konec.config(text=zaloga_napisov[i], fg='red')
     napis_konec.pack()
     koncen_gumb.pack()
@@ -175,9 +196,7 @@ class Gumb():
                     self.napis = ''
             self.spremeni_stanje(pritisnjen)
         else:
-            #print('sem v elsu gumba ({},{})'.format(self.vrstica, self.stolpec))
             if self.lahko_odprem_sosednje() == True:
-                #print('sem v ifu gumba ({},{})'.format(self.vrstica, self.stolpec))
                 self.odpri_sosednje()
         preveri_zmago()
 
@@ -200,7 +219,6 @@ class Gumb():
                 stevec += 1
         if self.napis == str(stevec):
             return True
-        #print('nisem vrnil "True", ker sem debil in ne dojemam da je {} in {} enako'.format(self.napis, stevec))
         return False
 
     def odpri_konec(self):
@@ -223,19 +241,15 @@ class Gumb():
             self.stanje = zakrit
             self.button.config(text='')
 
-############################################################################################################################
 
+#-----------------------------------------------------------------------------------------------------------------
 
-#mreža z gumbi
-tabela = naredi_tabelo()
 
 #zgornji napisi za stevilo vrstic, stolpcev in bomb
-zgornji_napis_vrstice = tk.Label(zg, text='Število vrstic: {}'.format(VRSTICE))
-zgornji_napis_stolpci = tk.Label(zg, text='Število stolpcev: {}'.format(STOLPCI))
+zgornji_napis_cas = tk.Label(zg, text='Čas igranja:')
 zgornji_napis_bombe = tk.Label(zg, text='Število bomb: {}'.format(BOMBE)) #tukaj je treba se popraviti stvari
-zgornji_napis_vrstice.pack()
-zgornji_napis_stolpci.pack()
 zgornji_napis_bombe.pack()
+zgornji_napis_cas.pack()
 
 #prazna vrstica
 prazna_vrstica = tk.Label(zg, text='')
@@ -244,9 +258,12 @@ prazna_vrstica2 = tk.Label(zg, text='')
 
 #napis in gumb za konec igre
 napis_konec = tk.Label(zg, text='', fg='red')
-koncen_gumb = tk.Button(zg, text='Nova igra', command=zapri)
+koncen_gumb = tk.Button(zg, text='Zapri', command=zapri)
 
+#mreža z gumbi
+tabela = naredi_tabelo()
 zaloga_bomb = posuj_bombe()
 povej_gumbom_kaj_so()
+gumbom_prilagodi_barvo()
 
 main_okno.mainloop()
