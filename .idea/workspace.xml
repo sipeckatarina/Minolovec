@@ -14,8 +14,8 @@
       <file leaf-file-name="startno_okno.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/startno_okno.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-408">
-              <caret line="18" column="38" lean-forward="true" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
+            <state relative-caret-position="306">
+              <caret line="18" column="38" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -23,8 +23,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="110" lean-forward="true" selection-start-line="110" selection-end-line="110" />
+            <state relative-caret-position="255">
+              <caret line="72" column="34" selection-start-line="72" selection-start-column="34" selection-end-line="72" selection-end-column="34" />
               <folding>
                 <element signature="e#39#59#0" expanded="true" />
               </folding>
@@ -80,6 +80,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -91,7 +92,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -238,13 +238,13 @@
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.122395836" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.28070176" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.28070176" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3994602" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3994602" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -533,83 +533,16 @@
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/Documents/FAKS/1. letnik/uvod v programiranje/Project Euler/(2) Even Fibonacci numbers.py" />
-    <entry file="file://$USER_HOME$/Documents/FAKS/1. letnik/uvod v programiranje/Project Euler/1_Multiples_of_3_and_5.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Documents/FAKS/1. letnik/uvod v programiranje/Project Euler/2_Even_Fibonacci_numbers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="18" lean-forward="true" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Documents/FAKS/1. letnik/uvod v programiranje/Project Euler/3_Largest_prime_factor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="14" lean-forward="true" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Documents/FAKS/1. letnik/uvod v programiranje/Project Euler/4_Largest_palindrome_product.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="22" lean-forward="true" selection-start-line="14" selection-start-column="22" selection-end-line="14" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Documents/FAKS/1. letnik/uvod v programiranje/Project Euler/5_Smallest_multiple.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="26" lean-forward="true" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Documents/FAKS/1. letnik/uvod v programiranje/Project Euler/6_Sum_square_difference.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="19" lean-forward="true" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Documents/FAKS/1. letnik/uvod v programiranje/Project Euler/7_10001st_prime.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="39" column="17" lean-forward="true" selection-start-line="39" selection-start-column="17" selection-end-line="39" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Documents/FAKS/1. letnik/uvod v programiranje/Project Euler/8_Largest_product_in_a_series.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Documents/FAKS/1. letnik/uvod v programiranje/Project Euler/9_Special_Pythagorean_triplet.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="21" lean-forward="true" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Documents/FAKS/1. letnik/uvod v programiranje/Project Euler/10_Summation_of_primes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-30">
-          <caret line="9" column="32" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/startno_okno.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-408">
-          <caret line="18" column="38" lean-forward="true" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/Documents/FAKS/1. letnik/uvod v programiranje/Project Euler/1_Multiples_of_3_and_5.py" />
+    <entry file="file://$USER_HOME$/Documents/FAKS/1. letnik/uvod v programiranje/Project Euler/2_Even_Fibonacci_numbers.py" />
+    <entry file="file://$USER_HOME$/Documents/FAKS/1. letnik/uvod v programiranje/Project Euler/3_Largest_prime_factor.py" />
+    <entry file="file://$USER_HOME$/Documents/FAKS/1. letnik/uvod v programiranje/Project Euler/4_Largest_palindrome_product.py" />
+    <entry file="file://$USER_HOME$/Documents/FAKS/1. letnik/uvod v programiranje/Project Euler/5_Smallest_multiple.py" />
+    <entry file="file://$USER_HOME$/Documents/FAKS/1. letnik/uvod v programiranje/Project Euler/6_Sum_square_difference.py" />
+    <entry file="file://$USER_HOME$/Documents/FAKS/1. letnik/uvod v programiranje/Project Euler/7_10001st_prime.py" />
+    <entry file="file://$USER_HOME$/Documents/FAKS/1. letnik/uvod v programiranje/Project Euler/8_Largest_product_in_a_series.py" />
+    <entry file="file://$USER_HOME$/Documents/FAKS/1. letnik/uvod v programiranje/Project Euler/9_Special_Pythagorean_triplet.py" />
+    <entry file="file://$USER_HOME$/Documents/FAKS/1. letnik/uvod v programiranje/Project Euler/10_Summation_of_primes.py" />
     <entry file="file://$PROJECT_DIR$/gumbi.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -617,10 +550,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/startno_okno.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="38" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="110" lean-forward="true" selection-start-line="110" selection-end-line="110" />
+        <state relative-caret-position="255">
+          <caret line="72" column="34" selection-start-line="72" selection-start-column="34" selection-end-line="72" selection-end-column="34" />
           <folding>
             <element signature="e#39#59#0" expanded="true" />
           </folding>
