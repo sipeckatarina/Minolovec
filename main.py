@@ -5,6 +5,8 @@ import sys
 import os
 import timeit
 
+startno_okno = sto.Startno_okno()
+startno_okno
 
 PUF = 'puf'
 ZASTAVA = 'f'
@@ -22,13 +24,13 @@ main_okno = tk.Tk()
 main_okno.title('Minolovec')
 
 #poravnaj okno
-sirina_okna = main_okno.winfo_reqwidth()
-dolzina_okna = main_okno.winfo_reqheight()
-sirina_ekrana = main_okno.winfo_screenwidth()
-dolzina_ekrana = main_okno.winfo_screenheight()
-pozicija_desno = int(sirina_ekrana / 2 - sirina_okna)
-pozicija_dol = int(dolzina_ekrana / 2 - dolzina_okna)
-main_okno.geometry("+{}+{}".format(pozicija_desno, pozicija_dol))
+#sirina_okna = main_okno.winfo_reqwidth()
+#dolzina_okna = main_okno.winfo_reqheight()
+#sirina_ekrana = main_okno.winfo_screenwidth()
+#dolzina_ekrana = main_okno.winfo_screenheight()
+#pozicija_desno = int(sirina_ekrana / 2 - sirina_okna)
+#pozicija_dol = int(dolzina_ekrana / 2 - dolzina_okna)
+#main_okno.geometry("+{}+{}".format(pozicija_desno, pozicija_dol))
 
 #razdeljeno okno na dva dela
 zg = tk.Frame(main_okno)
@@ -99,6 +101,7 @@ def odpri_vse():
 def izpisi_koncen_napis(izid):
     if izid == 'zmaga':
         napis_konec.config(text='BRAVO!', fg='VioletRed1')
+        smajli.config(image=dzek)
     else:
         prvi = 'Tole pa ni šlo...'
         drugi = 'BUM! Lahko greste med Dunajske dečke.'
@@ -108,14 +111,21 @@ def izpisi_koncen_napis(izid):
         sesti = 'Kaj pa sreča v ljubezni?'
         i = r.randint(0, 5)
         zaloga_napisov = [prvi, drugi, tretji, cetrti, peti, sesti]
-        napis_konec.config(text=zaloga_napisov[i], fg='red')
+        napis_konec.config(text=zaloga_napisov[i], fg='VioletRed1')
+        smajli.config(image=zalosten)
     napis_konec.pack()
-    koncen_gumb.pack()
+    #koncen_gumb.pack()
     prazna_vrstica2.pack()
 
 
-def zapri():
-    main_okno.destroy()
+def funkcija_smajli():
+    if smajli.config('image')[-1] == 'pyimage2' or smajli.config('image')[-1] == 'pyimage4':
+        #resetiraj isto stevilo vrstic in stolpcev?
+        main_okno
+        print('Ostajam prižgan.')
+    else:
+        main_okno.destroy()
+
 
 
 class Gumb():
@@ -186,6 +196,7 @@ class Gumb():
     def levi_klik(self):
         if self.stanje == zakrit:
             if self.je_ni_bomba == 'je':
+                smajli.config(image=zalosten)
                 izpisi_koncen_napis('ni slo')
                 odpri_vse()
                 self.button.config(fg='red')
@@ -234,12 +245,16 @@ class Gumb():
         if novo_stanje == zastava:
             self.stanje = zastava
             self.button.config(text=ZASTAVA, fg='red')
+            smajli.config(image=zacuden)
         elif novo_stanje == pritisnjen:
             self.stanje = pritisnjen
             self.button.config(text=self.napis, relief='sunken')
+            if smajli.config('image')[-1] != 'pyimage3':
+                smajli.config(image=vesel)
         elif novo_stanje == zakrit:
             self.stanje = zakrit
             self.button.config(text='')
+            smajli.config(image=vesel)
 
 
 #-----------------------------------------------------------------------------------------------------------------
@@ -247,23 +262,38 @@ class Gumb():
 
 #zgornji napisi za stevilo vrstic, stolpcev in bomb
 zgornji_napis_cas = tk.Label(zg, text='Čas igranja:')
-zgornji_napis_bombe = tk.Label(zg, text='Število bomb: {}'.format(BOMBE)) #tukaj je treba se popraviti stvari
+zgornji_napis_bombe = tk.Label(zg, text='Število bomb: {}'.format(BOMBE))
 zgornji_napis_bombe.pack()
 zgornji_napis_cas.pack()
 
 #prazna vrstica
 prazna_vrstica = tk.Label(zg, text='')
 prazna_vrstica.pack()
-prazna_vrstica2 = tk.Label(zg, text='')
 
 #napis in gumb za konec igre
 napis_konec = tk.Label(zg, text='', fg='red')
-koncen_gumb = tk.Button(zg, text='Zapri', command=zapri)
+#koncen_gumb = tk.Button(zg, text='Zapri', command=zapri)
 
 #mreža z gumbi
 tabela = naredi_tabelo()
 zaloga_bomb = posuj_bombe()
 povej_gumbom_kaj_so()
 gumbom_prilagodi_barvo()
+
+#smajli
+dzek = tk.PhotoImage(file='dzek.png')
+vesel = tk.PhotoImage(file='vesel.png')
+zalosten = tk.PhotoImage(file='zalosten.png')
+zacuden = tk.PhotoImage(file='zacuden.png')
+
+#postavi smajlija
+smajli=tk.Button(zg, image=vesel, command=funkcija_smajli)
+#smajli.config(width=26, height=26)
+smajli.pack()
+
+#druga prazna vrstica
+prazna_vrstica2 = tk.Label(zg, text='')
+prazna_vrstica2.pack()
+
 
 main_okno.mainloop()
