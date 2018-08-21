@@ -6,8 +6,8 @@ class Konstanta():
         self.stevilo = stevilo
 
 #v mainu VRSTICE, STOLPCI in BOMBE niso objekti, ampak stevila
-VRSTICE = Konstanta(10)
-STOLPCI = Konstanta(10)
+VRSTICE = Konstanta(15)
+STOLPCI = Konstanta(15)
 BOMBE = Konstanta(int(VRSTICE.stevilo * STOLPCI.stevilo * 0.15))
 
 
@@ -19,16 +19,16 @@ class Startno_okno():
         self.okno = tk.Tk()
         self.okno.title('Minolovec')
 
-        # poravnaj okno
-        self.sirina_okna = self.okno.winfo_reqwidth()
-        self.dolzina_okna = self.okno.winfo_reqheight()
-        self.sirina_ekrana = self.okno.winfo_screenwidth()
-        self.dolzina_ekrana = self.okno.winfo_screenheight()
-        self.pozicija_desno = int(self.sirina_ekrana / 2 - self.sirina_okna / 2)
-        self.pozicija_dol = int(self.dolzina_ekrana / 2 - self.dolzina_okna / 2)
-        self.okno.geometry("+{}+{}".format(self.pozicija_desno, self.pozicija_dol))
+        #poravnaj okno
+        #self.sirina_okna = self.okno.winfo_reqwidth()
+        #self.dolzina_okna = self.okno.winfo_reqheight()
+        #self.sirina_ekrana = self.okno.winfo_screenwidth()
+        #self.dolzina_ekrana = self.okno.winfo_screenheight()
+        #self.pozicija_desno = int(self.sirina_ekrana / 2 - self.sirina_okna / 2)
+        #self.pozicija_dol = int(self.dolzina_ekrana / 2 - self.dolzina_okna / 2)
+        #self.okno.geometry("+{}+{}".format(self.pozicija_desno, self.pozicija_dol))
 
-        # razdeljeno okno na tri dele
+        #razdeljeno okno na tri dele
         self.cist_zgoraj = tk.Frame(self.okno)
         self.zgoraj = tk.Frame(self.okno)
         self.spodaj = tk.Frame(self.okno)
@@ -36,18 +36,19 @@ class Startno_okno():
         self.zgoraj.grid(row=2, column=1)
         self.spodaj.grid(row=3, column=1)
 
-        # definirani napisi
-        self.napis_privzeto = tk.Label(self.cist_zgoraj, text='Privzete vrednosti so 10, 10 in 15.', fg='grey')
+        #definirani napisi
+        pri='Privzete vrednosti so {}, {} in {}.'.format(VRSTICE.stevilo, STOLPCI.stevilo, BOMBE.stevilo)
+        self.napis_privzeto = tk.Label(self.cist_zgoraj, text=pri, fg='grey')
         self.napis_vhod_vrstice = tk.Label(self.zgoraj, text='Število vrstic: ')
         self.napis_vhod_stolpci = tk.Label(self.zgoraj, text='Število stolpcev: ')
         self.napis_vhod_bombe = tk.Label(self.zgoraj, text='Število bomb: ')
 
-        # definirani vhodi
+        #definirani vhodi
         self.vhod_vrstice = tk.Entry(self.zgoraj)
         self.vhod_stolpci = tk.Entry(self.zgoraj)
         self.vhod_bombe = tk.Entry(self.zgoraj)
 
-        # zgornji del
+        #zgornji del
         self.napis_privzeto.grid(row=1, column=1)
         self.napis_vhod_vrstice.grid(row=2, column=1)
         self.napis_vhod_stolpci.grid(row=3, column=1)
@@ -56,21 +57,21 @@ class Startno_okno():
         self.vhod_stolpci.grid(row=3, column=2)
         self.vhod_bombe.grid(row=5, column=2)
 
-        # priporoci
+        #priporoci
         self.priporoci_gumb = tk.Button(self.spodaj, text='priporoči število bomb', command=self.priporoci)
         self.priporoci_gumb.grid(row=2, column=1)
 
-        # prazna vrstica, da je lepše
+        #prazna vrstica, da je lepše
         self.prazna_vrstica = tk.Label(text=' ')
         self.prazna_vrstica.grid(row=5, column=1)
 
-        # opozorila
+        #opozorila
         self.opozorilo = tk.Label(self.spodaj, text='', fg='red')
 
-        # hvala
+        #hvala
         self.hvala = tk.Label(self.spodaj, text='')
 
-        # OK
+        #OK
         self.ok_button = tk.Button(self.okno, text='OK', command=self.ok)
         self.ok_button.grid(row=6, column=1)
 

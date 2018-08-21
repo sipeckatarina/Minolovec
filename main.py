@@ -1,19 +1,22 @@
 import tkinter as tk
 import startno_okno as sto
 import random as r
+from time import gmtime, strftime
 import sys
 import os
-import timeit
 
+#startno okno
 startno_okno = sto.Startno_okno()
 startno_okno
 
+#oznake, konstante
 PUF = 'puf'
 ZASTAVA = 'f'
 VRSTICE = sto.VRSTICE.stevilo
 STOLPCI = sto.STOLPCI.stevilo
 BOMBE = sto.BOMBE.stevilo
 cekiranje_za_zmago = sto.Konstanta(1)
+zacni_steti_cas=sto.Konstanta(1)
 VELIKOST_GUMBA = 3
 
 #stanja
@@ -23,7 +26,7 @@ zastava, pritisnjen, zakrit, bomba = 'zastava', 'pritisnjen', 'zakrit', 'bomba'
 main_okno = tk.Tk()
 main_okno.title('Minolovec')
 
-#poravnaj okno
+#poravnaj okno ... tukaj je potreben update okna ... ne gre
 #sirina_okna = main_okno.winfo_reqwidth()
 #dolzina_okna = main_okno.winfo_reqheight()
 #sirina_ekrana = main_okno.winfo_screenwidth()
@@ -38,10 +41,15 @@ sp = tk.Frame(main_okno)
 zg.grid(row=1)
 sp.grid(row=2)
 
+#nastavek za cas
+cas_zacetek = sto.Konstanta(0)
+cas_konec = sto.Konstanta(0)
+
 
 #--------------------------------------------------------------------------------------------------------------------
 
 
+#naredi tabelo
 def naredi_tabelo():
     tab = []
     for i in range(VRSTICE):
@@ -54,6 +62,7 @@ def naredi_tabelo():
     return tab
 
 
+#doloci bombe
 def posuj_bombe():
     zaloga_bomb = []
     while len(zaloga_bomb) < BOMBE:
@@ -65,6 +74,7 @@ def posuj_bombe():
     return zaloga_bomb
 
 
+#cifra ali puf
 def povej_gumbom_kaj_so():
     for i in range(VRSTICE):
         for j in range(STOLPCI):
@@ -73,6 +83,7 @@ def povej_gumbom_kaj_so():
             tabela[i][j].poisci_stevilo_bomb()
 
 
+#barva
 def gumbom_prilagodi_barvo():
     tabela_barv = [None, 'dark green', 'darkOrchid4', 'navy', 'slate blue', 'gold4', 'DodgerBlue4', 'coral4', 'turquoise4']
     for i in range(VRSTICE):
@@ -81,6 +92,7 @@ def gumbom_prilagodi_barvo():
                 tabela[i][j].button.config(fg=tabela_barv[int(tabela[i][j].napis)])
 
 
+#zmaga?
 def preveri_zmago():
     if cekiranje_za_zmago.stevilo == 1:
         for i in range(VRSTICE):
@@ -88,9 +100,11 @@ def preveri_zmago():
                 if tabela[i][j] not in zaloga_bomb:
                     if tabela[i][j].stanje != pritisnjen:
                         return False
+        izracunaj_cas('koncni')
         izpisi_koncen_napis('zmaga')
 
 
+#konecno odpiranje
 def odpri_vse():
     cekiranje_za_zmago.stevilo = 0
     for i in range(VRSTICE):
@@ -98,26 +112,28 @@ def odpri_vse():
             tabela[i][j].odpri_konec()
 
 
+#napisi
 def izpisi_koncen_napis(izid):
     if izid == 'zmaga':
         napis_konec.config(text='BRAVO!', fg='VioletRed1')
         smajli.config(image=dzek)
+        izpisi_cas()
     else:
         prvi = 'Tole pa ni šlo...'
         drugi = 'BUM! Lahko greste med Dunajske dečke.'
         tretji = 'Več sreče prihodnjič.'
         cetrti = 'SORČI! Imate še 8 življenj.'
         peti = 'Slaba... Kar hrabro na naslednje minsko polje.'
-        sesti = 'Kaj pa sreča v ljubezni?'
+        sesti = 'Bo pa več sreče v ljubezni.'
         i = r.randint(0, 5)
         zaloga_napisov = [prvi, drugi, tretji, cetrti, peti, sesti]
         napis_konec.config(text=zaloga_napisov[i], fg='VioletRed1')
         smajli.config(image=zalosten)
     napis_konec.pack()
     #koncen_gumb.pack()
-    prazna_vrstica2.pack()
 
 
+#smajli
 def funkcija_smajli():
     if smajli.config('image')[-1] == 'pyimage2' or smajli.config('image')[-1] == 'pyimage4':
         #resetiraj isto stevilo vrstic in stolpcev?
@@ -126,8 +142,37 @@ def funkcija_smajli():
     else:
         main_okno.destroy()
 
+#cas - racznanje
+def izracunaj_cas(zacetni_ali_koncni):
+    cas = strftime("%H %M %S", gmtime())
+    razdri = cas.split(' ')
+    if zacetni_ali_koncni == 'zacetni':
+        cas_zacetek.stevilo = int(razdri[0]) * 3600 + int(razdri[1]) * 60 + int(razdri[2])
+        print(cas_zacetek.stevilo)
+    else:
+        cas_konec.stevilo = int(razdri[0]) * 3600 + int(razdri[1]) * 60 + int(razdri[2])
 
+#cas - pisanje
+def izpisi_cas():
+    def cas_igranja(zacetni, koncni):
+        cas = koncni - zacetni
+        minute = cas // 60
+        sekunde = cas % 60
+        return [minute, sekunde]
+    minute, sekunde = cas_igranja(cas_zacetek.stevilo, cas_konec.stevilo)
+    if minute == 0:
+        napis_cas.config(text='Igrali ste {} sekund.'.format(sekunde))
+    elif minute == 1:
+        napis_cas.config(text='Igrali ste 1 minuto in {} sekund.'.format(sekunde))
+    elif minute == 2:
+        napis_cas.config(text='Igrali ste {} minuti in {} sekund.'.format(minute, sekunde))
+    elif minute in [3, 4]:
+        napis_cas.config(text='Igrali ste {} minute in {} sekund.'.format(minute, sekunde))
+    else:
+        napis_cas.config(text='Igrali ste {} minut in {} sekund.'.format(minute, sekunde))
+        #bi lahko pravilno sklanjala tudi sekunde ...
 
+#gumbi
 class Gumb():
 
     def __init__(self, vrstica, stolpec, napis=None, okno=sp, stanje='zakrit', je_ni_bomba='ni'):
@@ -194,6 +239,9 @@ class Gumb():
             self.napis = str(num)
 
     def levi_klik(self):
+        if zacni_steti_cas.stevilo == 1:
+            izracunaj_cas('zacetni')
+            zacni_steti_cas.stevilo = 0
         if self.stanje == zakrit:
             if self.je_ni_bomba == 'je':
                 smajli.config(image=zalosten)
@@ -291,9 +339,8 @@ smajli=tk.Button(zg, image=vesel, command=funkcija_smajli)
 #smajli.config(width=26, height=26)
 smajli.pack()
 
-#druga prazna vrstica
-prazna_vrstica2 = tk.Label(zg, text='')
-prazna_vrstica2.pack()
-
+#cas
+napis_cas = tk.Label(zg, text='')
+napis_cas.pack()
 
 main_okno.mainloop()
