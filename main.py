@@ -1,5 +1,6 @@
 import tkinter as tk
 import startno_okno as sto
+import high_score_okno as hso
 import random as r
 from time import gmtime, strftime
 import sys
@@ -11,13 +12,16 @@ startno_okno
 
 #oznake, konstante
 PUF = 'puf'
-ZASTAVA = 'f'
+ZASTAVA = 'F'
+IME = startno_okno.ime
 VRSTICE = sto.VRSTICE.stevilo
 STOLPCI = sto.STOLPCI.stevilo
 BOMBE = sto.BOMBE.stevilo
 cekiranje_za_zmago = sto.Konstanta(1)
 zacni_steti_cas=sto.Konstanta(1)
 VELIKOST_GUMBA = 3
+CAS = sto.Konstanta(0)
+TOCKE = sto.Konstanta(0)
 
 #stanja
 zastava, pritisnjen, zakrit, bomba = 'zastava', 'pritisnjen', 'zakrit', 'bomba'
@@ -101,6 +105,7 @@ def preveri_zmago():
                     if tabela[i][j].stanje != pritisnjen:
                         return False
         izracunaj_cas('koncni')
+        izracunaj_stevilo_tock()
         izpisi_koncen_napis('zmaga')
 
 
@@ -115,21 +120,24 @@ def odpri_vse():
 #napisi
 def izpisi_koncen_napis(izid):
     if izid == 'zmaga':
-        napis_konec.config(text='BRAVO!', fg='VioletRed1')
+        napis_konec.config(text='BRAVO, {}!'.format(IME), fg='VioletRed1')
         smajli.config(image=dzek)
         izpisi_cas()
+        izpisi_stevilo_tock()
     else:
         prvi = 'Tole pa ni šlo...'
         drugi = 'BUM! Lahko greste med Dunajske dečke.'
-        tretji = 'Več sreče prihodnjič.'
+        tretji = 'Opala ... Več sreče prihodnjič.'
         cetrti = 'SORČI! Imate še 8 življenj.'
-        peti = 'Slaba... Kar hrabro na naslednje minsko polje.'
-        sesti = 'Bo pa več sreče v ljubezni.'
-        i = r.randint(0, 5)
-        zaloga_napisov = [prvi, drugi, tretji, cetrti, peti, sesti]
+        peti = 'Slaba ... Kar hrabro na naslednje minsko polje.'
+        sesti = 'Saj bo več sreče v ljubezni.'
+        sedmi = 'Bo pa treba še nekaj žgancev!'
+        i = r.randint(0, 6)
+        zaloga_napisov = [prvi, drugi, tretji, cetrti, peti, sesti, sedmi]
         napis_konec.config(text=zaloga_napisov[i], fg='VioletRed1')
         smajli.config(image=zalosten)
     napis_konec.pack()
+    prazna_vrstica.pack()
     #koncen_gumb.pack()
 
 
@@ -138,9 +146,14 @@ def funkcija_smajli():
     if smajli.config('image')[-1] == 'pyimage2' or smajli.config('image')[-1] == 'pyimage4':
         #resetiraj isto stevilo vrstic in stolpcev?
         main_okno
-        print('Ostajam prižgan.')
-    else:
+        print('Kar ste začeli, to končajte.')
+    if smajli.config('image')[-1] == 'pyimage1':
+        hso.High_score_okno(IME, izracunaj_stevilo_tock(), 'ja')
         main_okno.destroy()
+    else:
+        hso.High_score_okno(IME, izracunaj_stevilo_tock(), 'ne')
+        main_okno.destroy()
+
 
 #cas - racznanje
 def izracunaj_cas(zacetni_ali_koncni):
@@ -148,17 +161,24 @@ def izracunaj_cas(zacetni_ali_koncni):
     razdri = cas.split(' ')
     if zacetni_ali_koncni == 'zacetni':
         cas_zacetek.stevilo = int(razdri[0]) * 3600 + int(razdri[1]) * 60 + int(razdri[2])
-        print(cas_zacetek.stevilo)
     else:
         cas_konec.stevilo = int(razdri[0]) * 3600 + int(razdri[1]) * 60 + int(razdri[2])
 
+
+#vrne seznam [minute, sekunde]
+def cas_igranja(zacetni, koncni):
+    cas = koncni - zacetni
+    minute = cas // 60
+    sekunde = cas % 60
+    if minute == 0 and sekunde == 0:
+        sekunde = 1
+        cas = 1
+    CAS.stevilo = cas
+    return [minute, sekunde]
+
+
 #cas - pisanje
 def izpisi_cas():
-    def cas_igranja(zacetni, koncni):
-        cas = koncni - zacetni
-        minute = cas // 60
-        sekunde = cas % 60
-        return [minute, sekunde]
     minute, sekunde = cas_igranja(cas_zacetek.stevilo, cas_konec.stevilo)
     if minute == 0:
         napis_cas.config(text='Igrali ste {} sekund.'.format(sekunde))
@@ -170,7 +190,26 @@ def izpisi_cas():
         napis_cas.config(text='Igrali ste {} minute in {} sekund.'.format(minute, sekunde))
     else:
         napis_cas.config(text='Igrali ste {} minut in {} sekund.'.format(minute, sekunde))
-        #bi lahko pravilno sklanjala tudi sekunde ...
+    napis_cas.pack()
+
+def izracunaj_stevilo_tock():
+    cas = cas_igranja(cas_zacetek.stevilo, cas_konec.stevilo)
+    if BOMBE < VRSTICE * STOLPCI - 3:
+        cas = cas[0] * 60 + cas[1]
+        procent_bomb = BOMBE / (VRSTICE * STOLPCI)
+        rezultat = VRSTICE * STOLPCI * (procent_bomb ** 2) / cas
+        if VRSTICE * STOLPCI < 100:
+            TOCKE.stevilo = int(rezultat * 80000)
+            return int(rezultat * 80000)
+        else:
+            TOCKE.stevilo = int(rezultat * 100000)
+            return int(rezultat * 100000)
+    else: return 0
+
+def izpisi_stevilo_tock():
+    napis_stevilo_tock.config(text='Dosegli ste {} točk.'.format(TOCKE.stevilo))
+    napis_stevilo_tock.pack()
+
 
 #gumbi
 class Gumb():
@@ -309,14 +348,12 @@ class Gumb():
 
 
 #zgornji napisi za stevilo vrstic, stolpcev in bomb
-zgornji_napis_cas = tk.Label(zg, text='Čas igranja:')
 zgornji_napis_bombe = tk.Label(zg, text='Število bomb: {}'.format(BOMBE))
 zgornji_napis_bombe.pack()
-zgornji_napis_cas.pack()
 
 #prazna vrstica
 prazna_vrstica = tk.Label(zg, text='')
-prazna_vrstica.pack()
+#prazna_vrstica.pack()
 
 #napis in gumb za konec igre
 napis_konec = tk.Label(zg, text='', fg='red')
@@ -339,8 +376,8 @@ smajli=tk.Button(zg, image=vesel, command=funkcija_smajli)
 #smajli.config(width=26, height=26)
 smajli.pack()
 
-#cas
+#cas, tocke
 napis_cas = tk.Label(zg, text='')
-napis_cas.pack()
+napis_stevilo_tock = tk.Label(zg, text='')
 
 main_okno.mainloop()

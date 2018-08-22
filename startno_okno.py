@@ -8,7 +8,7 @@ class Konstanta():
 #v mainu VRSTICE, STOLPCI in BOMBE niso objekti, ampak stevila
 VRSTICE = Konstanta(15)
 STOLPCI = Konstanta(15)
-BOMBE = Konstanta(int(VRSTICE.stevilo * STOLPCI.stevilo * 0.15))
+BOMBE = Konstanta(0)
 
 
 class Startno_okno():
@@ -42,17 +42,21 @@ class Startno_okno():
         self.napis_vhod_vrstice = tk.Label(self.zgoraj, text='Število vrstic: ')
         self.napis_vhod_stolpci = tk.Label(self.zgoraj, text='Število stolpcev: ')
         self.napis_vhod_bombe = tk.Label(self.zgoraj, text='Število bomb: ')
+        self.napis_vhod_ime = tk.Label(self.zgoraj, text='Vaše ime: ')
 
         #definirani vhodi
         self.vhod_vrstice = tk.Entry(self.zgoraj)
         self.vhod_stolpci = tk.Entry(self.zgoraj)
         self.vhod_bombe = tk.Entry(self.zgoraj)
+        self.vhod_ime = tk.Entry(self.zgoraj)
 
         #zgornji del
         self.napis_privzeto.grid(row=1, column=1)
+        self.napis_vhod_ime.grid(row=1, column=1)
         self.napis_vhod_vrstice.grid(row=2, column=1)
         self.napis_vhod_stolpci.grid(row=3, column=1)
         self.napis_vhod_bombe.grid(row=5, column=1)
+        self.vhod_ime.grid(row=1, column=2)
         self.vhod_vrstice.grid(row=2, column=2)
         self.vhod_stolpci.grid(row=3, column=2)
         self.vhod_bombe.grid(row=5, column=2)
@@ -130,8 +134,8 @@ class Startno_okno():
             self.opozorilo.config(text='Število vrstic naj bo vsaj 5 in manjše ali enako 25.')
         else:
             self.opozorilo.config(text='Število stolpcev naj bo vsaj 5 in manjše ali enako 25.')
-            self.opozorilo.grid(row=3, column=1)
-            self.hvala.config(text='')
+        self.opozorilo.grid(row=3, column=1)
+        self.hvala.config(text='')
 
     def priporoci(self):
         self.preveri()
@@ -148,12 +152,21 @@ class Startno_okno():
             BOMBE.stevilo = priporocilo
 
     def ok(self):
+        self.name = self.vhod_ime.get()
+        if len(self.name) > 0:
+            self.ime = self.name[0].upper() + self.name[1:]
+        else:
+            self.ime = 'Boštjan'
         self.preveri()
         if self.preveri():
+            if BOMBE.stevilo == 0:
+                BOMBE.stevilo = int(VRSTICE.stevilo * STOLPCI.stevilo * 0.15)
             self.hvala.config(text='Hvala! ;)')
             self.hvala.grid(row=3, column=1)
+            print('Izbrano ime: ', self.ime)
             print('Izbrano stevilo vrstic: ', VRSTICE.stevilo)
             print('Izbrano stevilo stolpcev: ', STOLPCI.stevilo)
             print('Izbrano stevilo bomb: ', BOMBE.stevilo)
             self.okno.destroy()
 
+#Startno_okno()
