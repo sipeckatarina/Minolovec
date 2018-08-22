@@ -28,7 +28,7 @@ def preberi():
 
 class High_score_okno():
 
-    def __init__(self, ime, rezultat, dopisi='ja'):
+    def __init__(self, ime, rezultat, dopisi='ne'):
         self.dopisi = dopisi
         self.rezultat = rezultat
         self.ime = ime
@@ -46,12 +46,16 @@ class High_score_okno():
         self.spodaj.grid(row=3, column=1)
 
         #zgornji napis
-        self.zgornji_napis = tk.Label(self.zgoraj, text='Najvišji rezultati:')
-        self.zgornji_napis.pack()
+        self.zgornji_napis = tk.Label(self.zgoraj, text=' Najvišji rezultati:', fg='Blue2')
+        self.zgornji_napis.grid(row=1, column=1)
+
+        #prazna vrstica
+        self.prazna_vrstica = tk.Label(self.zgoraj)
+        self.prazna_vrstica.grid(row=2, column=1)
 
         #napisa za rezultat (ime in tocke)
-        self.napis_rezultat_ime = tk.Label(self.sredina, text='IME:')
-        self.napis_rezultat_tocke = tk.Label(self.sredina, text='TOČKE:')
+        self.napis_rezultat_ime = tk.Label(self.sredina, text='IME:', fg='VioletRed1')
+        self.napis_rezultat_tocke = tk.Label(self.sredina, text='TOČKE:     ', fg='VioletRed1')
         self.napis_rezultat_ime.grid(row=1, column=1)
         self.napis_rezultat_tocke.grid(row=1, column=2)
 
@@ -143,3 +147,5 @@ class High_score_okno():
         if self.dopisi == 'ja':
             with open('rezultati.txt', 'a') as dat_rezultati:
                 print('-> {}, {}'.format(self.ime, self.rezultat), file=dat_rezultati)
+
+#High_score_okno('Anže', 200)

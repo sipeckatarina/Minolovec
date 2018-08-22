@@ -192,20 +192,24 @@ def izpisi_cas():
         napis_cas.config(text='Igrali ste {} minut in {} sekund.'.format(minute, sekunde))
     napis_cas.pack()
 
+
+#tocke
 def izracunaj_stevilo_tock():
     cas = cas_igranja(cas_zacetek.stevilo, cas_konec.stevilo)
     if BOMBE < VRSTICE * STOLPCI - 3:
         cas = cas[0] * 60 + cas[1]
-        procent_bomb = BOMBE / (VRSTICE * STOLPCI)
-        rezultat = VRSTICE * STOLPCI * (procent_bomb ** 2) / cas
+        delez_bomb = BOMBE / (VRSTICE * STOLPCI)
+        rezultat = VRSTICE * STOLPCI * (delez_bomb ** 2) / cas
         if VRSTICE * STOLPCI < 100:
-            TOCKE.stevilo = int(rezultat * 80000)
-            return int(rezultat * 80000)
+            TOCKE.stevilo = int(rezultat * 8000)
+            return int(rezultat * 8000)
         else:
-            TOCKE.stevilo = int(rezultat * 100000)
-            return int(rezultat * 100000)
+            TOCKE.stevilo = int(rezultat * 10000)
+            return int(rezultat * 10000)
     else: return 0
 
+
+#izpisi tocke
 def izpisi_stevilo_tock():
     napis_stevilo_tock.config(text='Dosegli ste {} točk.'.format(TOCKE.stevilo))
     napis_stevilo_tock.pack()

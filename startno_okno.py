@@ -45,10 +45,10 @@ class Startno_okno():
         self.napis_vhod_ime = tk.Label(self.zgoraj, text='Vaše ime: ')
 
         #definirani vhodi
+        self.vhod_ime = tk.Entry(self.zgoraj)
         self.vhod_vrstice = tk.Entry(self.zgoraj)
         self.vhod_stolpci = tk.Entry(self.zgoraj)
         self.vhod_bombe = tk.Entry(self.zgoraj)
-        self.vhod_ime = tk.Entry(self.zgoraj)
 
         #zgornji del
         self.napis_privzeto.grid(row=1, column=1)
@@ -66,7 +66,7 @@ class Startno_okno():
         self.priporoci_gumb.grid(row=2, column=1)
 
         #prazna vrstica, da je lepše
-        self.prazna_vrstica = tk.Label(text=' ')
+        self.prazna_vrstica = tk.Label()
         self.prazna_vrstica.grid(row=5, column=1)
 
         #opozorila

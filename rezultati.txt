@@ -1,2 +1,3 @@
-Matej, 1729
-Katarina, 125
+-> Erika, 639
+-> Katarina, 543
+-> Boštjan, 543
