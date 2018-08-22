@@ -1,18 +1,17 @@
 # Minolovec 
 
 ## Projektna za UVP 
-
 Igra je npisana v jeziku Python. Navdihnila jo je vsem znana igra Minesweeper (Minolovec). 
 Namen igre je krepitev umskih sposobnosti igralca, ki mora v tabeli odpreti vsa polja, v katerih ni bombe. 
 
-## UVODNO OKNO 
+## Uvodno okno 
 Ob zagonu je igralcu ponujeno okno, v katerem lahko sam doloci velikost mreže (in s tem število polj), 
 doloci število vrstic in število stolpcev. V tretje polje vpiše število bomb, ki so nato nakljucno postavljene 
 v polja. Da igralec pri dolocanju števila bomb ne okleva predolgo, mu aplikacija ob pritisku pa gumb "priporoci 
 število bomb" ponudi prijazen celoštevilcni del 15-odstotne vrednosti števila vseh polj. Ce npr. doloci 13 
 vrstic in 13 stoplcev, mu za število bomb predlaga 16. 
 
-## IGRANJE 
+## Igranje
 Igralec lahko uporablja levi in desni gumb miške. 
 Levi je namenjen odpiranju polj, desni pa samo oznacbi polje, za katerega igralec predvideva, da je pod 
 njim bomba. 
@@ -26,7 +25,7 @@ postavi oznako, ki mu je v pomoc pri nadaljnjem igranju.
 Ce klikne na že odkrito polje, okrog katerega je toliko oznak za bombo, kolikor je številka, napisana v polju, 
 se odkrijejo še ostala neodkrita sosednja polja. 
 
-## KAKO KONCATI? 
+## Kako koncati? 
 Igra je lahko zakljucena na dva nacina: 
 - Neuspešno: levi klik na polje z bombo, ki je lahko nameren ali nenameren 
 - Uspešno: odprtje vseh polj brez bombe 
@@ -41,7 +40,7 @@ igralcev. Ce je bila igra uspešno zakljucena, se med rezultate vpiše tudi trenut
 lestvico le, ce je med najboljšimi dvanajstimi. 
 
 
-## VARNOST 
+## Varnost
 Dandanašnji je vse vec odvisnosti od igranja spletnih iger in iger nasploh, zato ponovno igranje igre 
 Minolovec deluje po principu 'vec je manj'. Za ponovno igranje je namrec potrebnih vec korakov, ki 
 igralca prej odvrnejo od igre in s tem zmanjšujejo tveganje za zasvojenost z igro Minolovec. 
