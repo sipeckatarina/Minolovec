@@ -30,15 +30,6 @@ zastava, pritisnjen, zakrit, bomba = 'zastava', 'pritisnjen', 'zakrit', 'bomba'
 main_okno = tk.Tk()
 main_okno.title('Minolovec')
 
-#poravnaj okno ... tukaj je potreben update okna ... ne gre
-#sirina_okna = main_okno.winfo_reqwidth()
-#dolzina_okna = main_okno.winfo_reqheight()
-#sirina_ekrana = main_okno.winfo_screenwidth()
-#dolzina_ekrana = main_okno.winfo_screenheight()
-#pozicija_desno = int(sirina_ekrana / 2 - sirina_okna)
-#pozicija_dol = int(dolzina_ekrana / 2 - dolzina_okna)
-#main_okno.geometry("+{}+{}".format(pozicija_desno, pozicija_dol))
-
 #razdeljeno okno na dva dela
 zg = tk.Frame(main_okno)
 sp = tk.Frame(main_okno)
@@ -138,7 +129,6 @@ def izpisi_koncen_napis(izid):
         smajli.config(image=zalosten)
     napis_konec.pack()
     prazna_vrstica.pack()
-    #koncen_gumb.pack()
 
 
 #smajli
@@ -228,21 +218,21 @@ class Gumb():
         self.button.bind('<Button-3>', self.desni_klik)
 
     def __repr__(self):
-        return 'Gumb ({}, {}, {})'.format(self.vrstica, self.stolpec, self.stevilka)
+        return 'Gumb ({}, {}, {})'.format(self.vrstica, self.stolpec, self.napis)
 
     def __str__(self):
-        return 'Gumb na ({0}, {1}), z napisom {}'.format(self.vrstica, self.stolpec, self.stevilka)
+        return 'Gumb na ({0}, {1}), z napisom {}'.format(self.vrstica, self.stolpec, self.napis)
 
+    #klice jo naredi_tabelo (zunanja)
     def prikazi(self, okno):
         return self.button.grid(row=self.vrstica, column=self.stolpec)
 
+    #klice jo povej_gumbom_kaj_so (zunanja)
     def bombasto(self):
         if self.je_ni_bomba == 'je':
             self.napis = PUF
 
-    def razkrij(self):
-        self.button.config(text=self.napis)
-
+    #klice jo povej_gumbom_kaj_so (zunanja)
     def poisci_sosednje(self):
         self.sosednji = []
         #vrstica zgoraj
@@ -273,6 +263,7 @@ class Gumb():
             self.gumb_desno = tabela[self.vrstica][self.stolpec + 1]
             self.sosednji.append(self.gumb_desno)
 
+    #klice jo povej_gumbom_kaj_so (zunanja)
     def poisci_stevilo_bomb(self):
         if self.je_ni_bomba == 'ni':
             num = 0
@@ -281,6 +272,7 @@ class Gumb():
                     num += 1
             self.napis = str(num)
 
+    #klice jo levi klik, odpir_sosednje
     def levi_klik(self):
         if zacni_steti_cas.stevilo == 1:
             izracunaj_cas('zacetni')
@@ -302,6 +294,7 @@ class Gumb():
                 self.odpri_sosednje()
         preveri_zmago()
 
+    #klice jo desni klik
     def desni_klik(self, random_stvar):
         #self.spremeni_stanje(zastava)
         if self.stanje == zakrit:
@@ -309,11 +302,13 @@ class Gumb():
         elif self.stanje == zastava:
             self.spremeni_stanje(zakrit)
 
+    #klice jo levi_klik
     def odpri_sosednje(self):
         for gumb in self.sosednji:
             if gumb.stanje == zakrit:
                 gumb.levi_klik()
 
+    #klice jo levi_klik
     def lahko_odprem_sosednje(self):
         stevec = 0
         for sosed in self.sosednji:
@@ -323,15 +318,22 @@ class Gumb():
             return True
         return False
 
+    #klice jo odpri_vse (zunanja)
     def odpri_konec(self):
         if self.stanje == zakrit:
             if not(tabela[self.vrstica][self.stolpec] in zaloga_bomb):
-                self.button.config(relief='sunken', bg='light grey')
                 self.napis = ''
                 self.spremeni_stanje(pritisnjen)
+                self.button.config(relief='sunken', bg='grey80')
             else:
-                self.button.config(text=self.napis, fg='blue', bg='light grey')
+                self.button.config(text=self.napis, fg='blue', bg='grey83')
+                self.button.config(command=self.onesposobi)
 
+    #klice jo odpri_konec
+    def onesposobi(self):
+        return True
+
+    #klice jo odpri_kones, desni_klik, levi_klik
     def spremeni_stanje(self, novo_stanje):
         if novo_stanje == zastava:
             self.stanje = zastava
@@ -339,7 +341,7 @@ class Gumb():
             smajli.config(image=zacuden)
         elif novo_stanje == pritisnjen:
             self.stanje = pritisnjen
-            self.button.config(text=self.napis, relief='sunken')
+            self.button.config(text=self.napis, relief='sunken', bg='grey91')
             if smajli.config('image')[-1] != 'pyimage3':
                 smajli.config(image=vesel)
         elif novo_stanje == zakrit:

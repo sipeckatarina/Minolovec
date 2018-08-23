@@ -6,6 +6,7 @@ class Konstanta():
         self.stevilo = stevilo
 
 #v mainu VRSTICE, STOLPCI in BOMBE niso objekti, ampak stevila
+IME = 'Matija'
 VRSTICE = Konstanta(15)
 STOLPCI = Konstanta(15)
 BOMBE = Konstanta(0)
@@ -37,7 +38,7 @@ class Startno_okno():
         self.spodaj.grid(row=3, column=1)
 
         #definirani napisi
-        pri='Privzete vrednosti so {}, {} in {}.'.format(VRSTICE.stevilo, STOLPCI.stevilo, BOMBE.stevilo)
+        pri='Privzete vrednosti so {}, {} in 15% zmnozka.'.format(VRSTICE.stevilo, STOLPCI.stevilo)
         self.napis_privzeto = tk.Label(self.cist_zgoraj, text=pri, fg='grey')
         self.napis_vhod_vrstice = tk.Label(self.zgoraj, text='Število vrstic: ')
         self.napis_vhod_stolpci = tk.Label(self.zgoraj, text='Število stolpcev: ')
@@ -156,7 +157,7 @@ class Startno_okno():
         if len(self.name) > 0:
             self.ime = self.name[0].upper() + self.name[1:]
         else:
-            self.ime = 'Boštjan'
+            self.ime = IME
         self.preveri()
         if self.preveri():
             if BOMBE.stevilo == 0:

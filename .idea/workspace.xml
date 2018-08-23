@@ -11,20 +11,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="startno_okno.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="startno_okno.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/startno_okno.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="142">
-              <caret line="157" column="13" lean-forward="true" selection-start-line="157" selection-start-column="13" selection-end-line="157" selection-end-column="13" />
+            <state relative-caret-position="136">
+              <caret line="8" column="7" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="136" column="65" lean-forward="true" selection-start-line="136" selection-start-column="55" selection-end-line="136" selection-end-column="65" />
+            <state relative-caret-position="2815">
+              <caret line="377" column="43" lean-forward="true" selection-start-line="377" selection-start-column="43" selection-end-line="377" selection-end-column="43" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -35,8 +35,8 @@
       <file leaf-file-name="high_score_okno.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/high_score_okno.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+            <state relative-caret-position="380">
+              <caret line="150" column="27" selection-start-line="150" selection-start-column="27" selection-end-line="150" selection-end-column="27" />
             </state>
           </provider>
         </entry>
@@ -62,6 +62,7 @@
       <find>cas</find>
       <find>napis_cas</find>
       <find>izracunaj_stevilo_tock(</find>
+      <find>privzete</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -76,9 +77,9 @@
         <option value="$PROJECT_DIR$/../../test/novo2.py" />
         <option value="$PROJECT_DIR$/../../test/novo1.py" />
         <option value="$PROJECT_DIR$/../Less/model_less.py" />
-        <option value="$PROJECT_DIR$/startno_okno.py" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/high_score_okno.py" />
+        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/startno_okno.py" />
       </list>
     </option>
   </component>
@@ -93,6 +94,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -104,7 +106,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -493,27 +494,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2815">
+          <caret line="377" column="43" lean-forward="true" selection-start-line="377" selection-start-column="43" selection-end-line="377" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/high_score_okno.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+        <state relative-caret-position="380">
+          <caret line="150" column="27" selection-start-line="150" selection-start-column="27" selection-end-line="150" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/startno_okno.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="157" column="13" lean-forward="true" selection-start-line="157" selection-start-column="13" selection-end-line="157" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="136" column="65" lean-forward="true" selection-start-line="136" selection-start-column="55" selection-end-line="136" selection-end-column="65" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="136">
+          <caret line="8" column="7" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
         </state>
       </provider>
     </entry>
