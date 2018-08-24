@@ -170,15 +170,50 @@ def cas_igranja(zacetni, koncni):
 def izpisi_cas():
     minute, sekunde = cas_igranja(cas_zacetek.stevilo, cas_konec.stevilo)
     if minute == 0:
-        napis_cas.config(text='Igrali ste {} sekund.'.format(sekunde))
+        if sekunde == 1:
+            napis_cas.config(text='Igrali ste 1 sekundo.')
+        elif sekunde == 2:
+            napis_cas.config(text='Igrali ste 2 sekundi.')
+        elif sekunde == 3 or sekunde == 4:
+            napis_cas.config(text='Igrali ste {} sekunde.'.format(sekunde))
+        else:
+            napis_cas.config(text='Igrali ste {} sekund.'.format(sekunde))
     elif minute == 1:
-        napis_cas.config(text='Igrali ste 1 minuto in {} sekund.'.format(sekunde))
+        if sekunde == 1:
+            napis_cas.config(text='Igrali ste 1 minuto in 1 sekundo.')
+        elif sekunde == 2:
+            napis_cas.config(text='Igrali ste 1 minuto in 2 sekundi.')
+        elif sekunde == 3 or sekunde == 4:
+            napis_cas.config(text='Igrali ste 1 minuto in {} sekunde.'.format(sekunde))
+        else:
+            napis_cas.config(text='Igrali ste 1 minuto in {} sekund.'.format(sekunde))
     elif minute == 2:
-        napis_cas.config(text='Igrali ste {} minuti in {} sekund.'.format(minute, sekunde))
+        if sekunde == 1:
+            napis_cas.config(text='Igrali ste 2 minuti in 1 sekundo.')
+        elif sekunde == 2:
+            napis_cas.config(text='Igrali ste 2 minuti in 2 sekundi.')
+        elif sekunde == 3 or sekunde == 4:
+            napis_cas.config(text='Igrali ste 2 minuti in {} sekunde.'.format(sekunde))
+        else:
+            napis_cas.config(text='Igrali ste 2 minuti in {} sekund.'.format(sekunde))
     elif minute in [3, 4]:
-        napis_cas.config(text='Igrali ste {} minute in {} sekund.'.format(minute, sekunde))
+        if sekunde == 1:
+            napis_cas.config(text='Igrali ste {} minute in 1 sekundo.'.format(minute))
+        elif sekunde == 2:
+            napis_cas.config(text='Igrali ste {} minute in 2 sekundi.'.format(minute))
+        elif sekunde == 3 or sekunde == 4:
+            napis_cas.config(text='Igrali ste {} minute in {} sekunde.'.format(minute, sekunde))
+        else:
+            napis_cas.config(text='Igrali ste {} minute in {} sekund.'.format(minute, sekunde))
     else:
-        napis_cas.config(text='Igrali ste {} minut in {} sekund.'.format(minute, sekunde))
+        if sekunde == 1:
+            napis_cas.config(text='Igrali ste {} minut in 1 sekundo.'.format(minute))
+        elif sekunde == 2:
+            napis_cas.config(text='Igrali ste {} minut in 2 sekundi.'.format(minute))
+        elif sekunde == 3 or sekunde == 4:
+            napis_cas.config(text='Igrali ste {} minut in {} sekunde.'.format(minute, sekunde))
+        else:
+            napis_cas.config(text='Igrali ste {} minut in {} sekund.'.format(minute, sekunde))
     napis_cas.pack()
 
 
@@ -200,7 +235,14 @@ def izracunaj_stevilo_tock():
 
 #izpisi tocke
 def izpisi_stevilo_tock():
-    napis_stevilo_tock.config(text='Dosegli ste {} točk.'.format(TOCKE.stevilo))
+    if TOCKE.stevilo % 100 == 1:
+        napis_stevilo_tock.config(text='Dosegli ste {} točko.'.format(TOCKE.stevilo))
+    elif TOCKE.stevilo % 100 == 2:
+        napis_stevilo_tock.config(text='Dosegli ste {} točki.'.format(TOCKE.stevilo))
+    elif TOCKE.stevilo % 100 == 2:
+        napis_stevilo_tock.config(text='Dosegli ste {} točke.'.format(TOCKE.stevilo))
+    else:
+        napis_stevilo_tock.config(text='Dosegli ste {} točk.'.format(TOCKE.stevilo))
     napis_stevilo_tock.pack()
 
 
