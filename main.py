@@ -128,7 +128,6 @@ def izpisi_koncen_napis(izid):
         napis_konec.config(text=zaloga_napisov[i], fg='VioletRed1')
         smajli.config(image=zalosten)
     napis_konec.pack()
-    prazna_vrstica.pack()
 
 
 #smajli
@@ -357,13 +356,8 @@ class Gumb():
 zgornji_napis_bombe = tk.Label(zg, text='Število bomb: {}'.format(BOMBE))
 zgornji_napis_bombe.pack()
 
-#prazna vrstica
-prazna_vrstica = tk.Label(zg, text='')
-#prazna_vrstica.pack()
-
 #napis in gumb za konec igre
 napis_konec = tk.Label(zg, text='', fg='red')
-#koncen_gumb = tk.Button(zg, text='Zapri', command=zapri)
 
 #mreža z gumbi
 tabela = naredi_tabelo()
@@ -379,8 +373,10 @@ zacuden = tk.PhotoImage(file='zacuden.png')
 
 #postavi smajlija
 smajli=tk.Button(zg, image=vesel, command=funkcija_smajli)
-#smajli.config(width=26, height=26)
 smajli.pack()
+
+#prazna vrstica
+tk.Label(zg, text='').pack()
 
 #cas, tocke
 napis_cas = tk.Label(zg, text='')

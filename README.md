@@ -1,7 +1,7 @@
 # Minolovec 
 
 ## Projektna za UVP 
-Igra je npisana v jeziku Python. Navdihnila jo je vsem znana igra Minesweeper (Minolovec). 
+Igra je napisana v jeziku Python. Navdihnila jo je vsem znana igra Minesweeper (Minolovec). 
 Namen igre je krepitev umskih sposobnosti igralca, ki mora v tabeli odpreti vsa polja, v katerih ni bombe. 
 
 ## Uvodno okno 

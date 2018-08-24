@@ -66,9 +66,8 @@ class Startno_okno():
         self.priporoci_gumb = tk.Button(self.spodaj, text='priporoči število bomb', command=self.priporoci)
         self.priporoci_gumb.grid(row=2, column=1)
 
-        #prazna vrstica, da je lepše
-        self.prazna_vrstica = tk.Label()
-        self.prazna_vrstica.grid(row=5, column=1)
+        #prazna vrstica
+        tk.Label().grid(row=5, column=1)
 
         #opozorila
         self.opozorilo = tk.Label(self.spodaj, text='', fg='red')
