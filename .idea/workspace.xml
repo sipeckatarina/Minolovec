@@ -11,11 +11,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="startno_okno.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/startno_okno.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
-              <caret line="246" lean-forward="true" selection-start-line="246" selection-end-line="246" />
+            <state relative-caret-position="221">
+              <caret line="13" column="18" lean-forward="true" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -23,20 +32,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="startno_okno.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/startno_okno.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="high_score_okno.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/high_score_okno.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="31" selection-start-line="31" selection-end-line="31" />
+            <state relative-caret-position="431">
+              <caret line="147" lean-forward="true" selection-start-line="147" selection-end-line="147" />
             </state>
           </provider>
         </entry>
@@ -78,10 +78,10 @@
         <option value="$PROJECT_DIR$/../../test/novo2.py" />
         <option value="$PROJECT_DIR$/../../test/novo1.py" />
         <option value="$PROJECT_DIR$/../Less/model_less.py" />
-        <option value="$PROJECT_DIR$/startno_okno.py" />
-        <option value="$PROJECT_DIR$/high_score_okno.py" />
         <option value="$PROJECT_DIR$/loop.py" />
+        <option value="$PROJECT_DIR$/high_score_okno.py" />
         <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/startno_okno.py" />
       </list>
     </option>
   </component>
@@ -257,7 +257,7 @@
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.28070176" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.28070176" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -273,6 +273,17 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/gumbi.py" />
@@ -481,31 +492,25 @@
       </provider>
     </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
+    <entry file="file://$PROJECT_DIR$/loop.py" />
     <entry file="file://$PROJECT_DIR$/high_score_okno.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="31" selection-start-line="31" selection-end-line="31" />
+        <state relative-caret-position="431">
+          <caret line="147" lean-forward="true" selection-start-line="147" selection-end-line="147" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/startno_okno.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/loop.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="11" selection-start-column="11" selection-end-column="11" />
+        <state relative-caret-position="323">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="246" lean-forward="true" selection-start-line="246" selection-end-line="246" />
+        <state relative-caret-position="221">
+          <caret line="13" column="18" lean-forward="true" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>

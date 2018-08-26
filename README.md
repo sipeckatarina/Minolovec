@@ -13,8 +13,7 @@ vrstic in 13 stoplcev, mu za število bomb predlaga 16.
 
 ## Igranje
 Igralec lahko uporablja levi in desni gumb miške. 
-Levi je namenjen odpiranju polj, desni pa samo oznaci polje, za katerega igralec predvideva, da je pod 
-njim bomba. 
+Levi je namenjen odpiranju polj, desni pa samo oznaci polje, za katerega igralec predvideva, da je v njem bomba. 
 Ko igralec odpre polje, pod katerim ni bombe, je v njem izpisano število bomb v osmih sosednjih poljih. 
 Ce bombe ni v nobenem od sosednjih polj, so odprta tudi vsa ta sosednja polja. Postopek je rekurzivno 
 ponovljen tudi za sosednja polja teh sosednjih polj, itd. Z odprtjem praznega polja je torej odprta 

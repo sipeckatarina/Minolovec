@@ -16,18 +16,11 @@ class Startno_okno():
 
     def __init__(self):
 
+        self.ime = IME
+
         #okno
         self.okno = tk.Tk()
         self.okno.title('Minolovec')
-
-        #poravnaj okno
-        #self.sirina_okna = self.okno.winfo_reqwidth()
-        #self.dolzina_okna = self.okno.winfo_reqheight()
-        #self.sirina_ekrana = self.okno.winfo_screenwidth()
-        #self.dolzina_ekrana = self.okno.winfo_screenheight()
-        #self.pozicija_desno = int(self.sirina_ekrana / 2 - self.sirina_okna / 2)
-        #self.pozicija_dol = int(self.dolzina_ekrana / 2 - self.dolzina_okna / 2)
-        #self.okno.geometry("+{}+{}".format(self.pozicija_desno, self.pozicija_dol))
 
         #razdeljeno okno na tri dele
         self.cist_zgoraj = tk.Frame(self.okno)
@@ -47,6 +40,7 @@ class Startno_okno():
 
         #definirani vhodi
         self.vhod_ime = tk.Entry(self.zgoraj)
+        self.vhod_ime.insert(0, self.ime)
         self.vhod_vrstice = tk.Entry(self.zgoraj)
         self.vhod_stolpci = tk.Entry(self.zgoraj)
         self.vhod_bombe = tk.Entry(self.zgoraj)
@@ -155,8 +149,6 @@ class Startno_okno():
         self.name = self.vhod_ime.get()
         if len(self.name) > 0:
             self.ime = self.name[0].upper() + self.name[1:]
-        else:
-            self.ime = IME
         self.preveri()
         if self.preveri():
             if BOMBE.stevilo == 0:
@@ -168,5 +160,3 @@ class Startno_okno():
             print('Izbrano stevilo stolpcev: ', STOLPCI.stevilo)
             print('Izbrano stevilo bomb: ', BOMBE.stevilo)
             self.okno.destroy()
-
-#Startno_okno()

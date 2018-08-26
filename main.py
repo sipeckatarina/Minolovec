@@ -4,11 +4,12 @@ import high_score_okno as hso
 import random as r
 from time import gmtime, strftime
 import sys
-import os
+
+#rekurzija (resi problem pri 25x25
+sys.setrecursionlimit(1500)
 
 #startno okno
 startno_okno = sto.Startno_okno()
-startno_okno
 
 #oznake, konstante
 PUF = 'puf'
@@ -24,7 +25,11 @@ CAS = sto.Konstanta(0)
 TOCKE = sto.Konstanta(0)
 
 #stanja
-zastava, pritisnjen, zakrit, bomba = 'zastava', 'pritisnjen', 'zakrit', 'bomba'
+zastava = 'zastava'
+pritisnjen = 'pritisnjen'
+zakrit = 'zakrit'
+bomba ='bomba'
+
 
 #okno
 main_okno = tk.Tk()
@@ -80,11 +85,12 @@ def povej_gumbom_kaj_so():
 
 #barva
 def gumbom_prilagodi_barvo():
-    tabela_barv = [None, 'dark green', 'darkOrchid4', 'navy', 'slate blue', 'gold4', 'DodgerBlue4', 'coral4', 'turquoise4']
+    tabela_barv = [None, 'navy', 'dark green', 'darkOrchid4', 'coral4', 'turquoise4', 'gold4', 'DodgerBlue4']
     for i in range(VRSTICE):
         for j in range(STOLPCI):
-            if tabela[i][j] not in zaloga_bomb:
-                tabela[i][j].button.config(fg=tabela_barv[int(tabela[i][j].napis)])
+            gumb = tabela[i][j]
+            if gumb not in zaloga_bomb:
+                gumb.button.config(fg=tabela_barv[int(gumb.napis)])
 
 
 #zmaga?
@@ -98,6 +104,7 @@ def preveri_zmago():
         izracunaj_cas('koncni')
         izracunaj_stevilo_tock()
         izpisi_koncen_napis('zmaga')
+        hso.High_score_okno(IME, izracunaj_stevilo_tock(), 'ja')
 
 
 #konecno odpiranje
@@ -133,15 +140,11 @@ def izpisi_koncen_napis(izid):
 #smajli
 def funkcija_smajli():
     if smajli.config('image')[-1] == 'pyimage2' or smajli.config('image')[-1] == 'pyimage4':
-        #resetiraj isto stevilo vrstic in stolpcev?
-        main_okno
         print('Kar ste začeli, to končajte.')
     if smajli.config('image')[-1] == 'pyimage1':
         hso.High_score_okno(IME, izracunaj_stevilo_tock(), 'ja')
-        main_okno.destroy()
     else:
         hso.High_score_okno(IME, izracunaj_stevilo_tock(), 'ne')
-        main_okno.destroy()
 
 
 #cas - racznanje
@@ -222,6 +225,8 @@ def izracunaj_stevilo_tock():
     cas = cas_igranja(cas_zacetek.stevilo, cas_konec.stevilo)
     if BOMBE < VRSTICE * STOLPCI - 3:
         cas = cas[0] * 60 + cas[1]
+        if cas < 2:
+            return 25
         delez_bomb = BOMBE / (VRSTICE * STOLPCI)
         rezultat = VRSTICE * STOLPCI * (delez_bomb ** 2) / cas
         if VRSTICE * STOLPCI < 100:

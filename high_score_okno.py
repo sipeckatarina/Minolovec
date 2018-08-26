@@ -145,5 +145,3 @@ class High_score_okno():
         if self.dopisi == 'ja':
             with open('rezultati.txt', 'a') as dat_rezultati:
                 print('-> {}, {}'.format(self.ime, self.rezultat), file=dat_rezultati)
-
-#High_score_okno('Anže', 200)
