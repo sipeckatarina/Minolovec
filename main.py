@@ -374,6 +374,8 @@ class Gumb():
             else:
                 self.button.config(text=self.napis, fg='blue', bg='grey83')
                 self.button.config(command=self.onesposobi)
+        if self.stanje == zastava and self.je_ni_bomba == 'ni':
+            self.button.config(text='X', fg='blue')
 
     #klice jo odpri_konec
     def onesposobi(self):
