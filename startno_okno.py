@@ -6,9 +6,9 @@ class Konstanta():
         self.stevilo = stevilo
 
 #v mainu VRSTICE, STOLPCI in BOMBE niso objekti, ampak stevila
-IME = 'Matija'
-VRSTICE = Konstanta(15)
-STOLPCI = Konstanta(15)
+IME = 'Debil'
+VRSTICE = Konstanta(7)
+STOLPCI = Konstanta(7)
 BOMBE = Konstanta(0)
 
 

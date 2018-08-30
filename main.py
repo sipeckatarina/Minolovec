@@ -68,7 +68,7 @@ def posuj_bombe():
     while len(zaloga_bomb) < BOMBE:
         i = r.randint(0, VRSTICE - 1)
         j = r.randint(0, STOLPCI - 1)
-        tabela[i][j].je_ni_bomba = 'je'
+        tabela[i][j].je_ni_bomba = True
         if tabela[i][j] not in zaloga_bomb:
             zaloga_bomb.append(tabela[i][j])
     return zaloga_bomb
@@ -142,9 +142,9 @@ def funkcija_smajli():
     if smajli.config('image')[-1] == 'pyimage2' or smajli.config('image')[-1] == 'pyimage4':
         print('Kar ste začeli, to končajte.')
     if smajli.config('image')[-1] == 'pyimage1':
-        hso.High_score_okno(IME, izracunaj_stevilo_tock(), 'ja')
+        hso.High_score_okno(IME, izracunaj_stevilo_tock(), True)
     else:
-        hso.High_score_okno(IME, izracunaj_stevilo_tock(), 'ne')
+        hso.High_score_okno(IME, izracunaj_stevilo_tock())
 
 
 #cas - racznanje
@@ -169,54 +169,25 @@ def cas_igranja(zacetni, koncni):
     return [minute, sekunde]
 
 
-#cas - pisanje
+#sklanjatve za napis casa in tock
+def koncnica(num):
+    if num % 100 == 1:
+        return 'o'
+    elif num % 100 == 2:
+        return 'i'
+    elif num % 100 in [3, 4]:
+        return 'e'
+    else:
+        return ''
+
+
+#izpisi cas
 def izpisi_cas():
     minute, sekunde = cas_igranja(cas_zacetek.stevilo, cas_konec.stevilo)
     if minute == 0:
-        if sekunde == 1:
-            napis_cas.config(text='Igrali ste 1 sekundo.')
-        elif sekunde == 2:
-            napis_cas.config(text='Igrali ste 2 sekundi.')
-        elif sekunde == 3 or sekunde == 4:
-            napis_cas.config(text='Igrali ste {} sekunde.'.format(sekunde))
-        else:
-            napis_cas.config(text='Igrali ste {} sekund.'.format(sekunde))
-    elif minute == 1:
-        if sekunde == 1:
-            napis_cas.config(text='Igrali ste 1 minuto in 1 sekundo.')
-        elif sekunde == 2:
-            napis_cas.config(text='Igrali ste 1 minuto in 2 sekundi.')
-        elif sekunde == 3 or sekunde == 4:
-            napis_cas.config(text='Igrali ste 1 minuto in {} sekunde.'.format(sekunde))
-        else:
-            napis_cas.config(text='Igrali ste 1 minuto in {} sekund.'.format(sekunde))
-    elif minute == 2:
-        if sekunde == 1:
-            napis_cas.config(text='Igrali ste 2 minuti in 1 sekundo.')
-        elif sekunde == 2:
-            napis_cas.config(text='Igrali ste 2 minuti in 2 sekundi.')
-        elif sekunde == 3 or sekunde == 4:
-            napis_cas.config(text='Igrali ste 2 minuti in {} sekunde.'.format(sekunde))
-        else:
-            napis_cas.config(text='Igrali ste 2 minuti in {} sekund.'.format(sekunde))
-    elif minute in [3, 4]:
-        if sekunde == 1:
-            napis_cas.config(text='Igrali ste {} minute in 1 sekundo.'.format(minute))
-        elif sekunde == 2:
-            napis_cas.config(text='Igrali ste {} minute in 2 sekundi.'.format(minute))
-        elif sekunde == 3 or sekunde == 4:
-            napis_cas.config(text='Igrali ste {} minute in {} sekunde.'.format(minute, sekunde))
-        else:
-            napis_cas.config(text='Igrali ste {} minute in {} sekund.'.format(minute, sekunde))
+        napis_cas.config(text='Igrali ste {} sekund'.format(sekunde) + koncnica(sekunde) + '.')
     else:
-        if sekunde == 1:
-            napis_cas.config(text='Igrali ste {} minut in 1 sekundo.'.format(minute))
-        elif sekunde == 2:
-            napis_cas.config(text='Igrali ste {} minut in 2 sekundi.'.format(minute))
-        elif sekunde == 3 or sekunde == 4:
-            napis_cas.config(text='Igrali ste {} minut in {} sekunde.'.format(minute, sekunde))
-        else:
-            napis_cas.config(text='Igrali ste {} minut in {} sekund.'.format(minute, sekunde))
+        napis_cas.config(text='Igrali ste {} minut'.format(minute) + koncnica(minute) + ' in {} sekund'.format(sekunde) + koncnica(sekunde) + '.')
     napis_cas.pack()
 
 
@@ -240,21 +211,14 @@ def izracunaj_stevilo_tock():
 
 #izpisi tocke
 def izpisi_stevilo_tock():
-    if TOCKE.stevilo % 100 == 1:
-        napis_stevilo_tock.config(text='Dosegli ste {} točko.'.format(TOCKE.stevilo))
-    elif TOCKE.stevilo % 100 == 2:
-        napis_stevilo_tock.config(text='Dosegli ste {} točki.'.format(TOCKE.stevilo))
-    elif TOCKE.stevilo % 100 == 2:
-        napis_stevilo_tock.config(text='Dosegli ste {} točke.'.format(TOCKE.stevilo))
-    else:
-        napis_stevilo_tock.config(text='Dosegli ste {} točk.'.format(TOCKE.stevilo))
+    napis_stevilo_tock.config(text='Dosegli ste {} točk'.format(TOCKE.stevilo) + koncnica(TOCKE.stevilo) + '.')
     napis_stevilo_tock.pack()
 
 
 #gumbi
 class Gumb():
 
-    def __init__(self, vrstica, stolpec, napis=None, okno=sp, stanje='zakrit', je_ni_bomba='ni'):
+    def __init__(self, vrstica, stolpec, napis=None, okno=sp, stanje='zakrit', je_ni_bomba=False):
         self.vrstica = vrstica
         self.stolpec = stolpec
         self.napis = napis
@@ -275,7 +239,7 @@ class Gumb():
 
     #klice jo povej_gumbom_kaj_so (zunanja)
     def bombasto(self):
-        if self.je_ni_bomba == 'je':
+        if self.je_ni_bomba:
             self.napis = PUF
 
     #klice jo povej_gumbom_kaj_so (zunanja)
@@ -311,10 +275,10 @@ class Gumb():
 
     #klice jo povej_gumbom_kaj_so (zunanja)
     def poisci_stevilo_bomb(self):
-        if self.je_ni_bomba == 'ni':
+        if not(self.je_ni_bomba):
             num = 0
             for vsak in self.sosednji:
-                if vsak.je_ni_bomba == 'je':
+                if vsak.je_ni_bomba:
                     num += 1
             self.napis = str(num)
 
@@ -324,7 +288,7 @@ class Gumb():
             izracunaj_cas('zacetni')
             zacni_steti_cas.stevilo = 0
         if self.stanje == zakrit:
-            if self.je_ni_bomba == 'je':
+            if self.je_ni_bomba:
                 smajli.config(image=zalosten)
                 izpisi_koncen_napis('ni slo')
                 odpri_vse()
@@ -374,7 +338,7 @@ class Gumb():
             else:
                 self.button.config(text=self.napis, fg='blue', bg='grey83')
                 self.button.config(command=self.onesposobi)
-        if self.stanje == zastava and self.je_ni_bomba == 'ni':
+        if self.stanje == zastava and not(self.je_ni_bomba):
             self.button.config(text='X', fg='blue')
 
     #klice jo odpri_konec

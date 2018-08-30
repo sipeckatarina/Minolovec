@@ -11,14 +11,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="startno_okno.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/startno_okno.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" column="30" lean-forward="true" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="383" column="48" lean-forward="true" selection-start-line="383" selection-start-column="48" selection-end-line="383" selection-end-column="48" />
+            <state relative-caret-position="197">
+              <caret line="209" lean-forward="true" selection-start-line="209" selection-end-line="209" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="high_score_okno.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/high_score_okno.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="30" column="50" selection-start-line="30" selection-start-column="50" selection-end-line="30" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -61,8 +79,8 @@
         <option value="$PROJECT_DIR$/../../test/novo1.py" />
         <option value="$PROJECT_DIR$/../Less/model_less.py" />
         <option value="$PROJECT_DIR$/loop.py" />
-        <option value="$PROJECT_DIR$/high_score_okno.py" />
         <option value="$PROJECT_DIR$/startno_okno.py" />
+        <option value="$PROJECT_DIR$/high_score_okno.py" />
         <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
@@ -474,27 +492,27 @@
     </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
     <entry file="file://$PROJECT_DIR$/loop.py" />
-    <entry file="file://$PROJECT_DIR$/high_score_okno.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="431">
-          <caret line="147" lean-forward="true" selection-start-line="147" selection-end-line="147" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/startno_okno.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../Project-Euler/97_Large_non-Mersenne_prime.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/startno_okno.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="30" lean-forward="true" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/high_score_okno.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="30" column="50" selection-start-line="30" selection-start-column="50" selection-end-line="30" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="383" column="48" lean-forward="true" selection-start-line="383" selection-start-column="48" selection-end-line="383" selection-end-column="48" />
+        <state relative-caret-position="197">
+          <caret line="209" lean-forward="true" selection-start-line="209" selection-end-line="209" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
